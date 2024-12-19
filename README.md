@@ -1,6 +1,6 @@
 ## About
 
-Sistem Pengajuan Cuti Pada BKPSDM
+Sistem IVENTARIS LAB STMIK ADHI GUNA
 INI LARAVEL 11
 SESUAIKAN VERSI PHP
 
@@ -9,7 +9,7 @@ SESUAIKAN VERSI PHP
 copy and jalankan kode di bawah ini di terminal komputer anda
 
 ```bash
-git clone https://github.com/JoCodes2/cuti-app.git
+git clone https://github.com/riko4627/STMIK-IVENTARIS-LAB.git
 ```
 
 install commposser di komputer anda
