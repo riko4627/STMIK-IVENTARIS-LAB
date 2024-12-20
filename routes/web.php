@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CMS\LabController;
+use App\Http\Controllers\CMS\CategoryController;
 use App\Http\Controllers\CMS\YearController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,7 +30,7 @@ Route::prefix('v1')->group(function () {
     });
 
     // Routes category
-    Route::prefix('category')->controller('controller Category'::class)->group(function () {
+    Route::prefix('category')->controller(CategoryController::class)->group(function(){
         Route::get('/', 'getAllData');
         Route::post('/create', 'createData');
         Route::get('/get/{id}', 'getDataById');
