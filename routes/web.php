@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CMS\YearController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,7 +9,7 @@ Route::get('/', function () {
 
 Route::prefix('v1')->group(function () {
     // Routes lab
-    Route::prefix('lab')->controller('controller lab' ::class)->group(function () {
+    Route::prefix('lab')->controller('controller lab'::class)->group(function () {
         Route::get('/', 'getAllData');
         Route::post('/create', 'createData');
         Route::get('/get/{id}', 'getDataById');
@@ -17,7 +18,7 @@ Route::prefix('v1')->group(function () {
     });
 
     // Routes year
-    Route::prefix('year')->controller('controller tahun'::class)->group(function () {
+    Route::prefix('year')->controller(YearController::class)->group(function () {
         Route::get('/', 'getAllData');
         Route::post('/create', 'createData');
         Route::get('/get/{id}', 'getDataById');
@@ -27,7 +28,7 @@ Route::prefix('v1')->group(function () {
     });
 
     // Routes category
-    Route::prefix('category')->controller('controller Category'::class)->group(function(){
+    Route::prefix('category')->controller('controller Category'::class)->group(function () {
         Route::get('/', 'getAllData');
         Route::post('/create', 'createData');
         Route::get('/get/{id}', 'getDataById');
@@ -36,7 +37,7 @@ Route::prefix('v1')->group(function () {
     });
 
     // Routes inventory
-    Route::prefix('inventory')->controller('Controller inventory'::class)->group(function (){
+    Route::prefix('inventory')->controller('Controller inventory'::class)->group(function () {
         Route::get('/', 'getAllData');
         Route::post('/create', 'createData');
         Route::get('/get/{id}', 'getDataById');
