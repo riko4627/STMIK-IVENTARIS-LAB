@@ -13,6 +13,8 @@ class CategoryModel extends Model
     protected $table = 'tb_category';
     protected $fillable = [
         'id',
-        'name'
+        'name',
+        'created_at',
+        'updated_at'
     ];
 }
