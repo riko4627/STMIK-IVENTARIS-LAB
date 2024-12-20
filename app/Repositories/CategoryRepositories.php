@@ -30,7 +30,7 @@ class CategoryRepositories implements CategoryInterface
     public function createData(CategoryRequest $request){
         try {
             $data = new $this->categoryModel;
-            $data->name_category = $request->input('name_category');
+            $data->name = $request->input('name');
             $data->save();
 
             return $this->success($data, 'success', 'success create data');
@@ -54,7 +54,7 @@ class CategoryRepositories implements CategoryInterface
             if (!$data) {
                 return $this->dataNotFound();
             }
-            $data->name_category = $request->input('name_category');
+            $data->name = $request->input('name');
             $data->save();
 
             return $this->success($data, 'success', 'success update data');
