@@ -27,7 +27,7 @@ Route::prefix('v1')->group(function () {
     });
 
     // Routes category
-    Route::prefix('category')->controller('controller Category'::class)->group(function(){
+    Route::prefix('category')->controller('Category'::class)->group(function(){
         Route::get('/', 'getAllData');
         Route::post('/create', 'createData');
         Route::get('/get/{id}', 'getDataById');
