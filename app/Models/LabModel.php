@@ -13,6 +13,9 @@ class LabModel extends Model
     protected $table = 'tb_lab';
     protected $fillable = [
         'id',
-        'name'
+        'name',
+        'location',
+        'created_at',
+        'updated_at',
     ];
 }
