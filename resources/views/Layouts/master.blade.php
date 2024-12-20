@@ -46,7 +46,7 @@
 
     <footer class="main-footer fixed-bottom">
         <div class="float-right d-none d-sm-inline-block">
-            <small>Copy Right © By Jocodes</small>
+            <small>Copy Right © By PENA</small>
             <b>Version</b> 1.0.0
         </div>
     </footer>
