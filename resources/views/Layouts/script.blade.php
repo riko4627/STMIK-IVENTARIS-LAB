@@ -33,6 +33,8 @@
 {{-- jsPDF --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/2.4.0/jquery.umd.min.js"></script>
+
 {{-- logout --}}
 <script>
     const urlLogout = 'v1/logout'
