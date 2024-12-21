@@ -13,23 +13,25 @@
                 data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-
                 <li class="nav-item">
-                    <a href="{{ url('/dashboard') }}"
-                        class="nav-link {{ request()->is('/dashboard') ? 'active-custom' : '' }}">
+                    <a href="{{ url('/') }}"
+                        class="nav-link {{ request()->is('/') ? 'active-custom' : '' }}">
                         <i class="nav-icon fa-solid fa-house"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-
-
                 <li class="nav-item">
                     <a href="{{ url('/user') }}" class="nav-link {{ request()->is('/user') ? 'active-custom' : '' }}">
                         <i class="nav-icon fa-solid fa-user"></i>
                         <p>Pengguna</p>
                     </a>
                 </li>
-
+                <li class="nav-item">
+                    <a href="{{ url('/category') }}" class="nav-link {{ request()->is('/category') ? 'active-custom' : '' }}">
+                        <i class="nav-icon fa-solid fa-hashtag"></i>
+                        <p>Kategori Barang</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
