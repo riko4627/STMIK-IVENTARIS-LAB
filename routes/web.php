@@ -9,6 +9,14 @@ Route::get('/', function () {
     return view('admin.Dashboard');
 });
 
+Route::get('/dashboard', function () {
+    return view('admin.Dashboard');
+});
+
+Route::get('/user', function () {
+    return view('admin.User');
+});
+
 Route::prefix('v1')->group(function () {
     // Routes lab
     Route::prefix('lab')->controller(LabController::class)->group(function () {
@@ -30,7 +38,7 @@ Route::prefix('v1')->group(function () {
     });
 
     // Routes category
-    Route::prefix('category')->controller(CategoryController::class)->group(function(){
+    Route::prefix('category')->controller(CategoryController::class)->group(function () {
         Route::get('/', 'getAllData');
         Route::post('/create', 'createData');
         Route::get('/get/{id}', 'getDataById');
