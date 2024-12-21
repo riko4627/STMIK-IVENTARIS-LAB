@@ -17,4 +17,5 @@
         </x-base-body>
     </div>
     <x-category.form-category></x-category.form-category>
+    <script type="module" src="{{ asset('js/category/category.controller.js') }}"></script>
 @endsection

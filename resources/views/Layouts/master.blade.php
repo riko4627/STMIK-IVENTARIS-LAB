@@ -53,7 +53,6 @@
 
     @include('Layouts.script')
     @yield('script')
-
 </body>
 
 </html>

@@ -9,7 +9,7 @@
                  <span aria-hidden="true">&times;</span>
              </button>
          </div>
-         <form id="modalTambah">
+         <form id="formTambah">
              <div class="modal-body">
                  @csrf
                  <div class="row">

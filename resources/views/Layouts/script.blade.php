@@ -3,6 +3,8 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('dist/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<!-- jQuer Validate -->
+<script src="{{ asset('dist/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
@@ -29,11 +31,14 @@
 <script src="{{ asset('dist/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('dist/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('dist/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<!-- Helper -->
+<script src="{{ asset('helper/helper.js') }}"></script>
+
+<!-- Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 {{-- jsPDF --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/2.4.0/jquery.umd.min.js"></script>
 
 {{-- logout --}}
 <script>

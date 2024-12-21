@@ -15,6 +15,11 @@
                 </x-slot>
             </x-base-table>
         </x-base-body>
-        <x-example.example-form></x-example.example-form>
     </div>
+
+    {{-- Menghubungkan ke from component --}}
+    <x-example.example-form></x-example.example-form>
+    
+    {{-- Menghubungkan ke file controller --}}
+    {{-- <script type="module" src="{{ asset('js/category/category.controller.js') }}"></script> --}}
 @endsection
