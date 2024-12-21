@@ -1,37 +1,40 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="/cms/dashboard" class="brand-link">
-        <img src="{{ asset('custom/asset/STMIK.png') }}" alt="AdminLTE Logo" class="img-fluid" style="opacity: .8">
-    </a>
+<div class="sidebar sidebar-style-2">
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+            <div class="user">
+                <div class="avatar-sm float-left mr-2">
+                    <img src="../assets/img/profile2.jpg" alt="..." class="avatar-img rounded-circle">
+                </div>
+                <div class="info">
+                    <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                        <span>
+                            @auth
+                                {{ auth()->user()->name }}
+                            @endauth
+                            @auth
+                                <span class="user-level">{{ auth()->user()->agency }}</span>
+                            @endauth
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
-
-                <li class="nav-item">
-                    <a href="{{ url('/dashboard') }}"
-                        class="nav-link {{ request()->is('/dashboard') ? 'active-custom' : '' }}">
-                        <i class="nav-icon fa-solid fa-house"></i>
+                        </span>
+                    </a>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <ul class="nav nav-primary">
+                <li class="nav-item {{ request()->is('/dashboard*') ? 'active' : '' }}">
+                    <a href="{{ url('/dashboard') }}">
+                        <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
 
-
-                <li class="nav-item">
-                    <a href="{{ url('/user') }}" class="nav-link {{ request()->is('/user') ? 'active-custom' : '' }}">
-                        <i class="nav-icon fa-solid fa-user"></i>
+                <li class="nav-item {{ request()->is('/user*') ? 'active' : '' }}">
+                    <a href="{{ url('/user') }}">
+                        <i class="fas fa-user"></i>
                         <p>Pengguna</p>
                     </a>
                 </li>
-
             </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
+        </div>
     </div>
-</aside>
+</div>
