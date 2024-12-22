@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin.Dashboard');
 });
+Route::get('/category', function () {
+    return view('pages.category');
+});
 
 Route::get('/dashboard', function () {
     return view('admin.Dashboard');

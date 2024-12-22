@@ -4,6 +4,10 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- API Url -->
+    <script>
+        let appUrl = '{{ env('APP_URL') }}';
+    </script>
     <title>sps</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     @include('Layouts.style')
@@ -30,7 +34,6 @@
     </div>
     @include('Layouts.script')
     @yield('script')
-
 </body>
 
 </html>

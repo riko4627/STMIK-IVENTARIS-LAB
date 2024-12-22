@@ -34,6 +34,12 @@
                         <p>Pengguna</p>
                     </a>
                 </li>
+                <li class="nav-item {{ request()->is('/category*') ? 'active' : '' }}">
+                    <a href="{{ url('/category') }}">
+                        <i class="fas fa-hashtag"></i>
+                        <p>Kategori Barang</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
