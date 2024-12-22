@@ -7,31 +7,47 @@ class categoryService {
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
-        })
-
-        let tableBody = '';
-
-        const response = await axios.get(`${appUrl}/v1/category`)
-        const responseData = await response.data;
-        console.log(responseData)
-
-        $.each(responseData.data, function (index, item) {
-            tableBody += "<tr>";
-            tableBody += "<td>" + (index + 1) + "</td>";
-            tableBody += "<td>" + item.name + "</td>";
-            tableBody +=
-                "<td   class='text-center '>" +
-                "<button class='btn btn-outline-primary btn-sm edit-modal mr-1' data-toggle='modal' data-target='#formCategoryModal' data-id='" +
-                item.id + "'><i class='fas fa-edit'></i></button>" +
-                "<button type='submit' class='delete-confirm btn btn-outline-danger btn-sm' data-id='" +
-                item.id + "'><i class='fas fa-trash-alt'></i></button>" +
-                "</td>";
-            tableBody += "</tr>";
         });
 
-        dataTable.clear().draw();
-        dataTable.rows.add($(tableBody)).draw();
+        try {
+            const response = await axios.get(`${appUrl}/v1/category/`)
+            const responseData = await response.data
+            console.log(responseData);
+
+
+            if (responseData && responseData.data) {
+                let tableBody = '';
+
+                responseData.data.forEach((item, index) => {
+                    tableBody += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${item.name}</td>
+                        <td class="text-center">
+                            <button class="btn btn-outline-primary btn-sm edit-modal mr-1" data-toggle="modal" data-target="#formCategoryModal" data-id="${item.id}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button type="submit" class="delete-confirm btn btn-outline-danger btn-sm" data-id="${item.id}">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                });
+
+                // Tambahkan baris ke tbody
+                $("#dataTable tbody").html(tableBody);
+
+                // Reload DataTable dengan data baru
+                dataTable.rows.add($('#dataTable tbody tr')).draw();
+            } else {
+                console.error('Response data is invalid:', responseData);
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     }
+
 
     async createData(e, checkingEdit) {
         let submitButton = $(e.target).find(':submit')
@@ -113,4 +129,4 @@ class categoryService {
     }
 }
 
-    export default categoryService;
+export default categoryService;
