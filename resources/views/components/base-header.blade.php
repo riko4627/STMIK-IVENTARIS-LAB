@@ -1,7 +1,7 @@
 @props(['headerTitle', 'headerAddButton', 'buttonAdd', 'formId', 'buttonExport', 'exportId'])
 
 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-    <h6 class="m-0 font-weight-bold">{{ $headerTitle }}</h6>
+    <h3 class="m-0 font-weight-bold">{{ $headerTitle }}</h3>
     <div class="ml-auto">
         @if ($buttonExport == 'true')
             <i class="fas fa fa-file-excel fa-2xl pr-3 text-success" style="cursor: pointer;" id="{{ $exportId }}"></i>

@@ -11,8 +11,9 @@ class categoryService {
 
         let tableBody = '';
 
-        const response = await axios.get(`${appUrl}/v1/category`);
+        const response = await axios.get(`${appUrl}/v1/category`)
         const responseData = await response.data;
+        console.log(responseData)
 
         $.each(responseData.data, function (index, item) {
             tableBody += "<tr>";

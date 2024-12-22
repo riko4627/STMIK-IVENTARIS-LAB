@@ -1,11 +1,11 @@
-function succesAlert() {
+function successAlert() {
     return Swal.fire({
         title: 'Success',
         text: 'Data berhasil terkirim',
         icon: 'success',
         showCancelButton: false,
         confirmButtonText: 'OK'
-    })
+    });
 }
 
 function successUpdateAlert() {
@@ -15,7 +15,7 @@ function successUpdateAlert() {
         icon: 'success',
         showCancelButton: false,
         confirmButtonText: 'OK'
-    })
+    });
 }
 
 function successDeleteAlert() {
@@ -25,7 +25,7 @@ function successDeleteAlert() {
         icon: 'success',
         showConfirmButton: true,
         timer: 5000
-    })
+    });
 }
 
 function warningAlert() {
@@ -35,7 +35,7 @@ function warningAlert() {
         icon: 'warning',
         showConfirmButton: true,
         timer: 5000
-    })
+    });
 }
 
 function errorAlert() {
@@ -45,7 +45,7 @@ function errorAlert() {
         icon: 'error',
         showConfirmButton: true,
         timer: 5000
-    })
+    });
 }
 
 function deleteAlert() {
