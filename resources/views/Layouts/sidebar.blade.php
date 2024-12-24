@@ -37,7 +37,7 @@
                 <li class="nav-item {{ request()->is('/lab*') ? 'active' : '' }}">
                     <a href="{{ url('/lab') }}">
                         <i class="fas fa-door-open"></i>
-                        <p>Ruangan Lab</p>
+                        <p>Ruang Lab</p>
                     </a>
                 </li>
                 <li class="nav-item {{ request()->is('/category*') ? 'active' : '' }}">
