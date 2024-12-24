@@ -1,68 +1,63 @@
-function successAlert() {
-    return Swal.fire({
-        title: 'Success',
-        text: 'Data berhasil terkirim',
-        icon: 'success',
-        showCancelButton: false,
-        confirmButtonText: 'OK'
-    });
-}
 
-function successUpdateAlert() {
+// alert success message
+function successAlert(message) {
     return Swal.fire({
-        title: 'Success',
-        text: 'Data berhasil diperbaharui',
+        title: 'Berhasil!',
+        text: message,
         icon: 'success',
-        showCancelButton: false,
-        confirmButtonText: 'OK'
-    });
-}
-
-function successDeleteAlert() {
-    return Swal.fire({
-        title: 'Success',
-        text: 'Data berhasil dihapus',
-        icon: 'success',
-        showConfirmButton: true,
-        timer: 5000
-    });
-}
-
-function warningAlert() {
-    return Swal.fire({
-        title: 'Warning',
-        text: 'Periksa kembali inputan anda!',
-        icon: 'warning',
-        showConfirmButton: true,
-        timer: 5000
+        showConfirmButton: false,
+        timer: 1000,
     });
 }
 
 function errorAlert() {
     return Swal.fire({
         title: 'Error',
-        text: 'Terjad kesalahan!',
+        text: 'Terjadi kesalahan!',
         icon: 'error',
+        showConfirmButton: false,
+        timer: 1000,
+    });
+}
+function warningAlert(message) {
+    Swal.fire({
+        title: 'Peringatan !',
+        text: message,
+        icon: 'warning',
+        timer: 5000,
         showConfirmButton: true,
-        timer: 5000
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#FFAD46',
     });
 }
 
-function deleteAlert() {
-    return Swal.fire({
-        title: 'Hapus ?',
-        text: 'Anda yakin ingin menghapus ini? ',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Ya',
-        cancelButtonText: 'Batal',
-        reverseButton: true
-    })
+
+// reaload browser
+function realoadBrowser() {
+    window.location.reload();
 }
 
-function categoryAlert(){
+// alert confirm message
+function confirmDeleteAlert(message) {
     return Swal.fire({
-        title:'warning!',
+        title: '<span style="font-size: 22px"> Konfirmasi</span>',
+        text: "Apakah anda yakin?",
+        showCancelButton: true,
+        showConfirmButton: true,
+        cancelButtonText: 'Tidak',
+        confirmButtonText: 'Ya',
+        reverseButtons: true,
+        confirmButtonColor: '#48ABF7',
+        cancelButtonColor: '#EFEFEF',
+        customClass: {
+            cancelButton: 'text-dark'
+        }
+    });
+}
+
+function categoryAlert() {
+    return Swal.fire({
+        title: 'warning!',
         text: 'Nama kategori sudah ada',
         icon: 'warning',
         showConfirmButton: true,

@@ -1,26 +1,28 @@
-import labService from './lab.service.js';
+import yearService from './year.service.js';
 
 $(document).ready(function () {
-    const labservice = new labService()
-    labservice.getAllData();
+    const yearservice = new yearService()
+    yearservice.getAllData();
 
     function validation() {
         $('#formTambah').validate({
             rules: {
-                name: {
-                    required: true
+                year: {
+                    required: true,
+                    digits: true,
+                    minlength: 4,
+                    maxlength: 4,
+                    range: [1900, new Date().getFullYear()]
                 },
-                location: {
-                    required: true
-                }
             },
             messages: {
-                name: {
-                    required: "Kategori tidak boleh kosong"
+                year: {
+                    required: "Form tidak boleh kosong",
+                    digits: "Tahun harus berupa angka",
+                    minlength: "Tahun harus terdiri dari 4 digit",
+                    maxlength: "Tahun harus terdiri dari 4 digit",
+                    range: "Tahun harus antara 1900 hingga tahun saat ini",
                 },
-                location: { // Tambahkan pesan validasi untuk lokasi
-                    required: "Lokasi tidak boleh kosong"
-                }
             },
             highlight: function (element) {
                 $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
@@ -37,10 +39,9 @@ $(document).ready(function () {
         });
     }
 
-
     validation();
 
-    $('#name, #location').on('input', function () {
+    $('#year').on('input', function () {
         $(this).valid();
     });
 
@@ -50,28 +51,31 @@ $(document).ready(function () {
 
     $('#formTambah').submit(function (e) {
         e.preventDefault();
-        labservice.createData(e, checkingEdit); // Proses penyimpanan data
+        yearservice.upsertData(e, checkingEdit);
     });
 
     $(document).on('click', '.edit-modal', function () {
         const id = $(this).data('id');
-        labservice.getDataById(id, checkingEdit); // Ambil data untuk mode edit
+        yearservice.getDataById(id, checkingEdit);
     });
 
     $(document).on('click', '.delete-confirm', function () {
         const id = $(this).data('id');
-        labservice.deleteData(id); // Hapus data berdasarkan ID
+        yearservice.deleteData(id);
     });
 
-    $('#formLabModal').on('hidden.bs.modal', function () {
-        // Reset field dan status form setelah modal ditutup
+    $('#formYearModal').on('hidden.bs.modal', function () {
         $('#id').val('');
-        $('#name').val('');
-        $('#location').val('');
-        $('#modal-title').text('Tambah Data');
+        $('#year').val('');
         $('.form-control').removeClass('is-invalid').removeClass('is-valid');
         $('.error').remove();
-        $('#preview').remove();
     });
+    $('#formYearModal').on('show.bs.modal', function () {
+        $('#modal-title').html(`
+            <i class="fas fa-box ms-2"></i>
+            Form Data
+        `);
+    });
+
 
 });
