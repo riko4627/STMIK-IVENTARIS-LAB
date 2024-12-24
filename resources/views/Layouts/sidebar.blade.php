@@ -3,7 +3,7 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="../assets/img/profile2.jpg" alt="..." class="avatar-img rounded-circle">
+                    <img src="../assets/img/lab.jpeg" alt="..." class="avatar-img rounded-circle">
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -32,6 +32,12 @@
                     <a href="{{ url('/user') }}">
                         <i class="fas fa-user"></i>
                         <p>Pengguna</p>
+                    </a>
+                </li>
+                <li class="nav-item {{ request()->is('/lab*') ? 'active' : '' }}">
+                    <a href="{{ url('/lab') }}">
+                        <i class="fas fa-door-open"></i>
+                        <p>Ruang Lab</p>
                     </a>
                 </li>
                 <li class="nav-item {{ request()->is('/category*') ? 'active' : '' }}">
