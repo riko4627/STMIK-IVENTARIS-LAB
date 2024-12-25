@@ -12,6 +12,9 @@ Route::get('/', function () {
 Route::get('/category', function () {
     return view('pages.category');
 });
+Route::get('/lab', function () {
+    return view('pages.lab');
+});
 
 Route::get('/dashboard', function () {
     return view('admin.Dashboard');
