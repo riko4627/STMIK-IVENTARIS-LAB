@@ -20,7 +20,7 @@
                              <input type="hidden" name="id" id="id" value="">
                              <label>Nama Kategori </label>
                              <input id="name" name="name" type="text" class="form-control"
-                                 placeholder="Nama Kategori Barang" autocomplete="off">
+                                 placeholder="Kategori Barang" autocomplete="off">
                          </div>
                      </div>
                  </div>

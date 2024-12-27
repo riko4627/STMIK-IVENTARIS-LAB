@@ -14,7 +14,6 @@ class CategoryController extends Controller
     {
         $this->CategoryRepositories = $CategoryInterface;
     }
-
     public function getAllData()
     {
         return $this->CategoryRepositories->getAllData();
@@ -23,13 +22,16 @@ class CategoryController extends Controller
     {
         return $this->CategoryRepositories->createData($request);
     }
-    public function getDataById($id){
+    public function getDataById($id)
+    {
         return $this->CategoryRepositories->getDataById($id);
     }
-    public function updateData(CategoryRequest $request, $id){
+    public function updateData(CategoryRequest $request, $id)
+    {
         return $this->CategoryRepositories->updateData($request, $id);
     }
-    public function deleteData($id){
+    public function deleteData($id)
+    {
         return $this->CategoryRepositories->deleteData($id);
     }
 }

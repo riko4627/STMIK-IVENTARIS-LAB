@@ -29,10 +29,19 @@ class CategoryRepositories implements CategoryInterface
 
     public function createData(CategoryRequest $request){
         try {
+            // Melakukan cek data yang duplikasi
+            $exists = $this->categoryModel->where('name', $request->input('name'))->exists();
+            if ($exists) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Nama kategori sudah ada',
+                ], 422);
+            }
+
             $data = new $this->categoryModel;
             $data->name = $request->input('name');
             $data->save();
-
+            
             return $this->success($data, 'success', 'success create data');
         } catch (\Throwable $th) {
             return $this->error($th->getMessage());
@@ -76,3 +85,4 @@ class CategoryRepositories implements CategoryInterface
         }
     }
 }
+

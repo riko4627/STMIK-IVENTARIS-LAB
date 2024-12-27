@@ -14,7 +14,6 @@ Route::get('/category', function () {
 Route::get('/lab', function () {
     return view('pages.lab');
 });
-
 Route::get('/dashboard', function () {
     return view('admin.Dashboard');
 });
