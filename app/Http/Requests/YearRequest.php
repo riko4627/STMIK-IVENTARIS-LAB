@@ -33,6 +33,7 @@ class YearRequest extends FormRequest
         throw new HttpResponseException(response()->json([
             'status' => 'not validate',
             'message' => 'cek your validation',
+            'code' => 422,
             'data' => $validator->errors()
         ]));
     }

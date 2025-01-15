@@ -12,7 +12,7 @@ trait HttpResponseTrait
             'status' => $status,
             'message' => $message,
             'data' => $data
-        ], $code);
+        ], 200);
     }
 
     protected function dataNotFound($status = "success", $message = 'Data not found', $code = 200)
@@ -20,7 +20,7 @@ trait HttpResponseTrait
         return response()->json([
             'status' => $status,
             'message' => $message
-        ], $code);
+        ], 404);
     }
 
     protected function delete($status = "success", $message = 'Success delete', $code = 200)
@@ -28,7 +28,7 @@ trait HttpResponseTrait
         return response()->json([
             'status' => $status,
             'message' => $message
-        ], $code);
+        ], 200);
     }
 
 

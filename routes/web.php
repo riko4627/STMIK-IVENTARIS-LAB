@@ -15,6 +15,9 @@ Route::get('/category', function () {
 Route::get('/lab', function () {
     return view('pages.lab');
 });
+Route::get('/year', function () {
+    return view('pages.year');
+});
 
 Route::get('/dashboard', function () {
     return view('admin.Dashboard');
