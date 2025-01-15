@@ -1,7 +1,7 @@
 @extends('Layouts.master')
 @section('content')
     <div class="card">
-        <x-base-header headerTitle="Daftar Ruangan Lab" buttonAdd="true" headerAddButton="Tambah Data" formId="#formLabModal"
+        <x-base-header headerTitle="Daftar Ruangan Lab" headerIcon="fas fa-box" buttonAdd="true" headerAddButton="Tambah Data" formId="#formLabModal"
             buttonExport="false" exportId="exportLab">
         </x-base-header>
         <x-base-body>

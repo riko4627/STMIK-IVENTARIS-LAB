@@ -34,6 +34,12 @@
                         <p>Pengguna</p>
                     </a>
                 </li>
+                <li class="nav-item {{ request()->is('year*') ? 'active' : '' }}">
+                    <a href="{{ url('/year') }}">
+                        <i class="fas fa-user"></i>
+                        <p>Tahun</p>
+                    </a>
+                </li>
                 <li class="nav-item {{ request()->is('/lab*') ? 'active' : '' }}">
                     <a href="{{ url('/lab') }}">
                         <i class="fas fa-door-open"></i>

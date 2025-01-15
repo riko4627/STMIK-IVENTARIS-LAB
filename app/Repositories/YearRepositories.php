@@ -21,14 +21,14 @@ class YearRepositories implements YearInterfaces
         if (!$data) {
             return $this->dataNotFound();
         } else {
-            return $this->success($data, 'success', 'Get all data successfully');
+            return $this->success($data, 'success', 'Successfully');
         }
     }
     public function createData(YearRequest $request)
     {
         try {
             $data = $this->yearmodel->create($request->all());
-            return $this->success($data, 'Data created successfully', 201);
+            return $this->success($data, 'success', 'Successfully');
         } catch (\Throwable $th) {
             return $this->error($th->getMessage());
         }
@@ -39,7 +39,7 @@ class YearRepositories implements YearInterfaces
         if (!$data) {
             return $this->dataNotFound();
         }
-        return $this->success($data, 'Get data by id successfully', 200);
+        return $this->success($data, '200', 'Successfully');
     }
     public function updateData(YearRequest $request, $id)
     {
@@ -49,7 +49,7 @@ class YearRepositories implements YearInterfaces
                 return $this->dataNotFound();
             }
             $data->update($request->all());
-            return $this->success($data, 'Data updated successfully', 200);
+            return $this->success($data, 'success', 'Successfully');
         } catch (\Throwable $th) {
             return $this->error($th->getMessage());
         }
