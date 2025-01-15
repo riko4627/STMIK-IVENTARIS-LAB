@@ -52,6 +52,12 @@
                         <p>Kategori Barang</p>
                     </a>
                 </li>
+                <li class="nav-item {{ request()->is('/inventory*') ? 'active' : '' }}">
+                    <a href="{{ url('/inventory') }}">
+                        <i class="fas fa-hashtag"></i>
+                        <p>Inventaris Barang</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
