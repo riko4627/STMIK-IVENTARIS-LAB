@@ -11,5 +11,4 @@ interface CategoryInterface
     public function getDataById($id);
     public function updateData(CategoryRequest $request, $id);
     public function deleteData($id);
-
 }

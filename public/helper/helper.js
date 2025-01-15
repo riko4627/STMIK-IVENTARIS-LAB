@@ -1,3 +1,27 @@
+// reload browser
+function realoadBrowser() {
+    window.location.reload();
+}
+
+// alert confirm message
+function confirmDeleteAlert(message) {
+    return Swal.fire({
+        title: '<span style="font-size: 22px"> Konfirmasi</span>',
+        text: "Apakah anda yakin?",
+        showCancelButton: true,
+        showConfirmButton: true,
+        cancelButtonText: 'Tidak',
+        confirmButtonText: 'Ya',
+        reverseButtons: true,
+        confirmButtonColor: '#48ABF7',
+        cancelButtonColor: '#EFEFEF',
+        customClass: {
+            cancelButton: 'text-dark'
+        }
+    });
+}
+
+f
 
 // alert success message
 function successAlert(message) {
@@ -61,7 +85,7 @@ function categoryAlert() {
         text: 'Nama kategori sudah ada',
         icon: 'warning',
         showConfirmButton: true,
-        timer: 5000
-    })
+        timer: 3000,
+    });
 }
 

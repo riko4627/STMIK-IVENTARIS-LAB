@@ -8,12 +8,12 @@ $(document).ready(function () {
         $('#formTambah').validate({
             rules: {
                 name: {
-                    required: true
+                    required: true,
                 }
             },
             messages: {
                 name: {
-                    required: "Kategori tidak boleh kosong"
+                    required: "Kategori tidak boleh kosong",
                 }
             },
             highlight: function (element) {
@@ -31,30 +31,30 @@ $(document).ready(function () {
         });
     }
 
-    validation()
+    validation();
 
     $('#name').on('input', function () {
         $(this).valid()
-    })
+    });
 
     function checkingEdit() {
-        return $('#id').val() ? true : false
+        return $('#id').val() ? true : false;
     }
 
     $('#formTambah').submit(function (e) {
         e.preventDefault();
         categoryservice.createData(e, checkingEdit)
-    })
+    });
 
     $(document).on('click', '.edit-modal', function () {
         const id = $(this).data('id')
         categoryservice.getDataById(id, checkingEdit)
-    })
+    });
 
     $(document).on('click', '.delete-confirm', function () {
         const id = $(this).data('id')
         categoryservice.deleteData(id)
-    })
+    });
 
     $('#formCategoryModal').on('hidden.bs.modal', function () {
         $('#id').val('')
@@ -63,5 +63,12 @@ $(document).ready(function () {
         $('.form-control').removeClass('is-invalid').removeClass('is-valid')
         $('.error').remove();
         $('#preview').remove()
-    })
+    });
+
+    $('#formCategoryModal').on('show.bs.modal', function () {
+        $('#modal-title').html(
+            `<i class="fas fa-box ms-2"></i>
+            Form Data`
+        );
+    });
 });
