@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreignUuid('id_year')->constrained('tb_year');
             $table->foreignUuid('id_category')->constrained('tb_category');
             $table->text('spesification');
+            $table->string('img_inventory');
             $table->timestamps();
         });
     }

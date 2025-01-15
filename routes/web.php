@@ -3,6 +3,7 @@
 use App\Http\Controllers\CMS\LabController;
 use App\Http\Controllers\CMS\CategoryController;
 use App\Http\Controllers\CMS\UserController;
+use App\Http\Controllers\CMS\InventoryController;
 use App\Http\Controllers\CMS\YearController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,13 +58,12 @@ Route::prefix('v1')->group(function () {
     });
 
     // Routes inventory
-    Route::prefix('inventory')->controller('Controller inventory'::class)->group(function () {
+    Route::prefix('inventory')->controller(InventoryController::class)->group(function () {
         Route::get('/', 'getAllData');
         Route::post('/create', 'createData');
         Route::get('/get/{id}', 'getDataById');
         Route::post('update/{id}', 'updateData');
         Route::delete('/delete/{id}', 'deleteData');
-        Route::post('/returnborrow/{id}', 'returnBorrow');
     });
 
     Route::prefix('users')->controller(UserController::class)->group(function () {
