@@ -19,7 +19,7 @@ class UserRepositories implements UserInterfaces
     public function getAllData()
     {
         $data = $this->userModel::all();
-        if ($data->isEmpty()) {
+        if (!$data) {
             return $this->dataNotFound();
         } else {
             return $this->success($data);
