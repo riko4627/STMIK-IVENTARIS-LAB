@@ -69,7 +69,7 @@ class categoryService {
 
     async createData(e, checkingEdit) {
         let submitButton = $(e.target).find(':submit')
-        try {    
+        try {
             const formData = new FormData(e.target)
             const name = formData.get('name');
 
@@ -78,7 +78,7 @@ class categoryService {
                 const responseData = await this.ajaxRequest(`${appUrl}/v1/category/update/${id}`, 'POST', formData);
                 console.log(responseData);
                 if (responseData.status === 'success') {
-                    successUpdateAlert().then(() => {
+                    successAlert().then(() => {
                         $('#formCategoryModal').modal('hide')
                         realoadBrowser();
                     })
@@ -105,13 +105,13 @@ class categoryService {
             submitButton.attr('disabled', false)
             console.log('error: ', error);
 
-            // Membaca respon dari error 
+            // Membaca respon dari error
             const responseData = error.responseJSON || error.responseData || null;
 
             if (responseData?.status === 'not validate') {
                 warningAlert('Form tidak boleh kosong!');
                 return;
-            } else if (responseData?.message === 'Nama kategori sudah ada') { 
+            } else if (responseData?.message === 'Nama kategori sudah ada') {
                 categoryAlert();
             } else {
                 errorAlert();
@@ -139,7 +139,7 @@ class categoryService {
                     const responseData = await this.ajaxRequest(`${appUrl}/v1/category/delete/${id}`, 'DELETE');
                     console.log(responseData);
                     if (responseData.status === 'success') {
-                        successDeleteAlert().then(() => {
+                        successAlert().then(() => {
                             realoadBrowser();
                         })
                     } else {

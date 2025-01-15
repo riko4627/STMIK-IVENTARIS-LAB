@@ -21,7 +21,7 @@ function confirmDeleteAlert(message) {
     });
 }
 
-f
+
 
 // alert success message
 function successAlert(message) {
