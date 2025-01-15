@@ -1,9 +1,8 @@
- {{-- Form updert data --}}
- <div class="modal fade" id="formLabModal" tabindex="-1" role="dialog" aria-labelledby="labLabel" aria-hidden="true">
+ <div class="modal fade" id="formLabModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
      <div class="modal-dialog" role="document">
          <div class="modal-content">
              <div class="modal-header">
-                 <h5 class="modal-title" id="modal-title">Tambah Data</h5>
+                 <h5 class="modal-title" id="modal-title">Form Data</h5>
                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                  </button>
@@ -11,32 +10,21 @@
              <form id="formTambah">
                  <div class="modal-body">
                      @csrf
-                     <div class="row">
-                         <div class="col-md-12" id="form-preview">
-                         </div>
-                         <div class="col-md-12">
-                             <div class="modal-group fill modal-show-validation">
-                                 <input type="hidden" name="id" id="id" value="">
-                                 <label>Nama Ruangan </label>
-                                 <input id="name" name="name" type="text" class="form-control"
-                                     placeholder="Nama Ruangan" autocomplete="off">
-                             </div>
-                         </div>
-                         <div class="col-md-12 mt-3">
-                             <div class="modal-group fill modal-show-validation">
-                                 <label>Lantai</label>
-                                 <input id="location" name="location" type="text" class="form-control"
-                                     placeholder="Lantai Keberapa" autocomplete="off">
-                             </div>
-                         </div>
+                     <div class="form-group fill modal-show-validation">
+                         <label for="name">Nama</label>
+                         <input id="name" name="name" type="text" class="form-control"
+                             placeholder="Nama Ruangan" autocomplete="off">
+                     </div>
+                     <div class="form-group fill modal-show-validation">
+                         <label for="location">Lantai</label>
+                         <textarea id="location" name="location" class="form-control" placeholder="Lantai" rows="3" autocomplete="off"></textarea>
                      </div>
                  </div>
                  <div class="modal-footer">
-                     <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Tutup</button>
-                     <button type="submit" class="btn btn-outline-primary">Simpan Data</button>
+                     <button type="button" class="btn btn-sm btn-outline-danger" data-dismiss="modal">Tutup</button>
+                     <button type="submit" class="btn btn-sm btn-outline-primary">Simpan Data</button>
                  </div>
              </form>
-
          </div>
      </div>
  </div>

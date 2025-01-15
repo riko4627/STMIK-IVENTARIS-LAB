@@ -1,4 +1,4 @@
-class labService {
+class yearService {
     ajaxRequest(url, method, data = null) {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -21,21 +21,18 @@ class labService {
         $("#dataTable tbody").empty();
 
         try {
-            const responseData = await this.ajaxRequest(`${appUrl}/v1/lab/`, 'GET');
+            const responseData = await this.ajaxRequest(`${appUrl}/v1/year/`, 'GET');
             console.log(responseData);
 
             if (responseData && responseData.data) {
-                console.log();
-
                 let tableBody = '';
                 responseData.data.forEach((item, index) => {
                     tableBody += `
                     <tr>
                         <td>${index + 1}</td>
-                        <td>${item.name}</td>
-                        <td>${item.location}</td>
+                        <td>${item.year}</td>
                         <td class="text-center">
-                            <button class="btn btn-outline-primary btn-sm edit-modal mr-1" data-toggle="modal" data-target="#formLabModal" data-id="${item.id}">
+                            <button class="btn btn-outline-primary btn-sm edit-modal mr-1" data-toggle="modal" data-target="#formYearModal" data-id="${item.id}">
                                 <i class="fas fa-edit"></i>
                             </button>
                             <button type="button" class="delete-confirm btn btn-outline-danger btn-sm" data-id="${item.id}">
@@ -71,12 +68,12 @@ class labService {
 
             if (checkingEdit()) {
                 const id = $('#id').val();
-                const responseData = await this.ajaxRequest(`${appUrl}/v1/lab/update/${id}`, 'POST', formData);
+                const responseData = await this.ajaxRequest(`${appUrl}/v1/year/update/${id}`, 'POST', formData);
 
                 if (responseData.status === 'success') {
                     successAlert().then(() => {
                         realoadBrowser();
-                        $('#formLabModal').modal('hide');
+                        $('#formYearModal').modal('hide');
                     });
                 } else if (responseData.code === 422) {
                     warningAlert();
@@ -85,13 +82,13 @@ class labService {
                 }
             } else {
                 submitButton.attr('disabled', true);
-                const responseData = await this.ajaxRequest(`${appUrl}/v1/lab/create`, 'POST', formData);
+                const responseData = await this.ajaxRequest(`${appUrl}/v1/year/create`, 'POST', formData);
                 console.log(responseData);
 
                 if (responseData.status === 'success') {
                     successAlert().then(() => {
                         realoadBrowser();
-                        $('#formLabModal').modal('hide');
+                        $('#formYearModal').modal('hide');
                     });
                 } else if (responseData.code === 422) {
                     warningAlert();
@@ -109,10 +106,9 @@ class labService {
 
     async getDataById(id, checkingEdit) {
         try {
-            const responseData = await this.ajaxRequest(`${appUrl}/v1/lab/get/${id}`, 'GET');
+            const responseData = await this.ajaxRequest(`${appUrl}/v1/year/get/${id}`, 'GET');
             $('#id').val(responseData.data.id);
-            $('#name').val(responseData.data.name);
-            $('#location').val(responseData.data.location);
+            $('#year').val(responseData.data.year);
             checkingEdit();
         } catch (error) {
             console.log(error);
@@ -121,9 +117,9 @@ class labService {
 
     async deleteData(id) {
         try {
-            const result = await confirmDeleteAlert();
+            const result = await confirmDeleteAlert(); 
             if (result.isConfirmed) {
-                const responseData = await this.ajaxRequest(`${appUrl}/v1/lab/delete/${id}`, 'DELETE');
+                const responseData = await this.ajaxRequest(`${appUrl}/v1/year/delete/${id}`, 'DELETE');
                 console.log(responseData);
 
 
@@ -142,4 +138,4 @@ class labService {
 
 }
 
-export default labService;
+export default yearService;

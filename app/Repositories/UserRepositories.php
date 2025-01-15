@@ -2,39 +2,37 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\LabRequest;
-use App\Interfaces\LabInterfaces;
-use App\Models\LabModel;
+use App\Http\Requests\UserRequest;
+use App\Interfaces\UserInterfaces;
+use App\Models\User;
 use App\Traits\HttpResponseTrait;
 use Illuminate\Support\Facades\Hash;
 
-
-
-class LabRepositories implements LabInterfaces
+class UserRepositories implements UserInterfaces
 {
     use HttpResponseTrait;
-    protected $LabModel;
-    public function __construct(LabModel $LabModel)
+    protected $userModel;
+    public function __construct(User $userModel)
     {
-        $this->LabModel = $LabModel;
+        $this->userModel = $userModel;
     }
-
     public function getAllData()
     {
-        $data = $this->LabModel::all();
-        if (!$data) {
+        $data = $this->userModel::all();
+        if ($data->isEmpty()) {
             return $this->dataNotFound();
         } else {
             return $this->success($data);
         }
     }
-    public function createData(LabRequest $request)
+    public function createData(UserRequest $request)
     {
         try {
-            // Create the Grup
-            $data = new $this->LabModel;
+            $data = new $this->userModel;
             $data->name = $request->input('name');
-            $data->location = $request->input('location');
+            $data->username = $request->input('username');
+            $data->email = $request->input('email');
+            $data->password =  Hash::make($request->input('password'));
 
             $data->save();
 
@@ -43,27 +41,27 @@ class LabRepositories implements LabInterfaces
             return $this->error($th->getMessage(), 400, $th, class_basename($this), __FUNCTION__);
         }
     }
-
     public function getDataById($id)
     {
-        $data = $this->LabModel::where('id', $id)->first();
+        $data = $this->userModel::where('id', $id)->first();
         if ($data) {
             return $this->success($data);
         } else {
             return $this->dataNotFound();
         }
     }
-
-    public function updateDataById(LabRequest $request, $id)
+    public function updateData(UserRequest $request, $id)
     {
         try {
-            // Temukan data pengguna berdasarkan ID
-            $data = $this->LabModel::findOrFail($id);
+            $data = $this->userModel::findOrFail($id);
 
-            // Perbarui data pengguna
             $data->name = $request->input('name');
-            $data->location = $request->input('location');
+            $data->username = $request->input('username');
+            $data->email = $request->input('email');
 
+            if ($request->input('password')) {
+                $data->password = Hash::make($request->input('password'));
+            }
 
             $data->save();
 
@@ -72,17 +70,15 @@ class LabRepositories implements LabInterfaces
             return $this->error($th->getMessage(), 400, $th, class_basename($this), __FUNCTION__);
         }
     }
-
     public function deleteData($id)
     {
         try {
-            // Temukan data pengguna berdasarkan ID
-            $data = $this->LabModel::findOrFail($id);
-
-            // Hapus data pengguna
+            $data = $this->userModel::findOrFail($id);
+            if (!$data) {
+                return $this->dataNotFound();
+            }
             $data->delete();
-
-            return $this->success("Data pengguna berhasil dihapus.");
+            return $this->delete();
         } catch (\Throwable $th) {
             return $this->error($th->getMessage(), 400, $th, class_basename($this), __FUNCTION__);
         }
