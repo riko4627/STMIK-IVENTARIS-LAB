@@ -20,7 +20,7 @@ class CategoryRepositories implements CategoryInterface
     public function getAllData()
     {
         $data = $this->categoryModel->all();
-        if ($data->isEmpty()) {
+        if (!$data) {
             return $this->dataNotFound();
         }else{
             return $this->success($data, 'success', 'success get all data');
