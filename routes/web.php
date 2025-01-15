@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CMS\LabController;
 use App\Http\Controllers\CMS\CategoryController;
+use App\Http\Controllers\CMS\UserController;
 use App\Http\Controllers\CMS\InventoryController;
 use App\Http\Controllers\CMS\YearController;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +63,14 @@ Route::prefix('v1')->group(function () {
         Route::post('/create', 'createData');
         Route::get('/get/{id}', 'getDataById');
         Route::post('update/{id}', 'updateData');
+        Route::delete('/delete/{id}', 'deleteData');
+    });
+
+    Route::prefix('users')->controller(UserController::class)->group(function () {
+        Route::get('/', 'getAllData');
+        Route::post('/create', 'createData');
+        Route::get('/get/{id}', 'getDataById');
+        Route::post('/update/{id}', 'updateData');
         Route::delete('/delete/{id}', 'deleteData');
     });
 });
