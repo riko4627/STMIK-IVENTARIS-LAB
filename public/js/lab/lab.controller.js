@@ -7,20 +7,33 @@ $(document).ready(function () {
     function validation() {
         $('#formTambah').validate({
             rules: {
-                name: {
-                    required: true
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 1,
+                        maxlength: 15
+                    },
+                    location: {
+                        required: true,
+                        minlength: 1,
+                        maxlength: 15
+                    },
+
                 },
-                location: {
-                    required: true
+                messages: {
+                    name: {
+                        required: "Nama tidak boleh kosong",
+                        minlength: "Nama harus minimal 1 karakter",
+                        maxlength: "Nama tidak boleh lebih dari 15 karakter"
+                    },
+                    location: {
+                        required: "Lokasi tidak boleh kosong",
+                        minlength: "Lokasi harus minimal 1 karakter",
+                        maxlength: "Lokasi tidak boleh lebih dari 15 karakter"
+                    },
+
                 }
-            },
-            messages: {
-                name: {
-                    required: "Kategori tidak boleh kosong"
-                },
-                location: { // Tambahkan pesan validasi untuk lokasi
-                    required: "Lokasi tidak boleh kosong"
-                }
+
             },
             highlight: function (element) {
                 $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
@@ -50,28 +63,31 @@ $(document).ready(function () {
 
     $('#formTambah').submit(function (e) {
         e.preventDefault();
-        labservice.createData(e, checkingEdit); // Proses penyimpanan data
+        labservice.upsertData(e, checkingEdit);
     });
 
     $(document).on('click', '.edit-modal', function () {
         const id = $(this).data('id');
-        labservice.getDataById(id, checkingEdit); // Ambil data untuk mode edit
+        labservice.getDataById(id, checkingEdit);
     });
 
     $(document).on('click', '.delete-confirm', function () {
         const id = $(this).data('id');
-        labservice.deleteData(id); // Hapus data berdasarkan ID
+        labservice.deleteData(id);
     });
 
     $('#formLabModal').on('hidden.bs.modal', function () {
-        // Reset field dan status form setelah modal ditutup
         $('#id').val('');
         $('#name').val('');
         $('#location').val('');
-        $('#modal-title').text('Tambah Data');
         $('.form-control').removeClass('is-invalid').removeClass('is-valid');
         $('.error').remove();
-        $('#preview').remove();
+    });
+    $('#formLabModal').on('show.bs.modal', function () {
+        $('#modal-title').html(`
+            <i class="fas fa-box ms-2"></i>
+            Form Data
+        `);
     });
 
 });

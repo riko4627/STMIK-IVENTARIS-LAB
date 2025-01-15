@@ -1,15 +1,15 @@
 @extends('Layouts.master')
 @section('content')
     <div class="card">
-        <x-base-header headerTitle="Daftar Ruangan Lab" headerIcon="fas fa-box" buttonAdd="true" headerAddButton="Tambah Data" formId="#formLabModal"
-            buttonExport="false" exportId="exportLab">
+        <x-base-header headerTitle="Lab" buttonAdd="true" headerIcon="fas fa-box" headerAddButton="Tambah Data"
+            formId="#formLabModal" buttonExport="false" exportId="exportLab">
         </x-base-header>
         <x-base-body>
             <x-base-table initId="dataTable">
                 <x-slot name="thead">
                     <tr>
                         <th>No</th>
-                        <th>Nama Ruangan</th>
+                        <th>Ruangan</th>
                         <th>Lantai</th>
                         <th>Aksi</th>
                     </tr>
