@@ -1,25 +1,33 @@
 class labService {
-    // Mengambil semua data lab dan menampilkan di DataTable
+    ajaxRequest(url, method, data = null) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url,
+                method,
+                data,
+                processData: false,
+                contentType: false,
+                success: (response) => resolve(response),
+                error: (error) => reject(error),
+            });
+        });
+    }
+
     async getAllData() {
-        // Hancurkan DataTable yang ada jika sudah ada
         if ($.fn.dataTable.isDataTable('#dataTable')) {
             $('#dataTable').DataTable().clear().destroy();
         }
 
-        // Hancurkan tabel lama dan kosongkan tbody
         $("#dataTable tbody").empty();
 
         try {
-            // Mengambil data dari API
-            const response = await axios.get(`${appUrl}/v1/lab/`);
-            const responseData = response.data; // Tidak perlu await lagi di sini
+            const responseData = await this.ajaxRequest(`${appUrl}/v1/lab/`, 'GET');
             console.log(responseData);
 
-            // Mengecek apakah data valid
             if (responseData && responseData.data) {
-                let tableBody = '';
+                console.log();
 
-                // Iterasi data dan tambahkan baris ke tabel
+                let tableBody = '';
                 responseData.data.forEach((item, index) => {
                     tableBody += `
                     <tr>
@@ -38,59 +46,55 @@ class labService {
                     `;
                 });
 
-                // Tambahkan baris ke tbody
                 $("#dataTable tbody").html(tableBody);
 
-                // Inisialisasi ulang DataTable setelah data dimuat
                 $('#dataTable').DataTable({
                     paging: true,
                     searching: true,
                     responsive: true,
-                    order: [[0, 'asc']], // Urutkan berdasarkan kolom pertama
-                    pageLength: 5, // Nilai default saat pertama kali dimuat
-                    lengthMenu: [ [5, 10, 25, 50, 100], [5, 10, 25, 50, 100] ] // Pilihan jumlah data yang ditampilkan
+                    order: [[0, 'asc']],
+                    pageLength: 5,
+                    lengthMenu: [[5, 10, 25, 50, 100], [5, 10, 25, 50, 100]],
                 });
             } else {
                 console.error('Response data is invalid:', responseData);
             }
-
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     }
 
-
-
-    // Menambahkan atau memperbarui data
-    async createData(e, checkingEdit) {
+    async upsertData(e, checkingEdit) {
         let submitButton = $(e.target).find(':submit');
         try {
             const formData = new FormData(e.target);
 
             if (checkingEdit()) {
                 const id = $('#id').val();
-                const response = await axios.post(`${appUrl}/v1/lab/update/${id}`, formData);
-                const responseData = response.data; // Tidak perlu await lagi di sini
+                const responseData = await this.ajaxRequest(`${appUrl}/v1/lab/update/${id}`, 'POST', formData);
 
                 if (responseData.status === 'success') {
-                    successUpdateAlert().then(() => {
+                    successAlert().then(() => {
+                        realoadBrowser();
                         $('#formLabModal').modal('hide');
-                        this.getAllData();
                     });
+                } else if (responseData.code === 422) {
+                    warningAlert();
                 } else {
                     errorAlert();
                 }
             } else {
                 submitButton.attr('disabled', true);
-                const response = await axios.post(`${appUrl}/v1/lab/create`, formData);
-                const responseData = response.data; // Tidak perlu await lagi di sini
+                const responseData = await this.ajaxRequest(`${appUrl}/v1/lab/create`, 'POST', formData);
                 console.log(responseData);
 
                 if (responseData.status === 'success') {
                     successAlert().then(() => {
+                        realoadBrowser();
                         $('#formLabModal').modal('hide');
                     });
-                    this.getAllData();
+                } else if (responseData.code === 422) {
+                    warningAlert();
                 } else {
                     errorAlert();
                 }
@@ -98,66 +102,44 @@ class labService {
             }
         } catch (error) {
             submitButton.attr('disabled', false);
-            console.log(error);
-
-            // Menangani error berdasarkan respons
-            if (error.response && error.response.data) {
-                if (error.response.data.name === 'Nama lab sudah ada') {
-                    labAlert();
-                } else if (error.response.data.location === 'location sudah ada') {
-                    labAlert();
-                } else if (error.response.status === 422) {
-                    warningAlert();
-                } else {
-                    errorAlert();
-                }
-            } else {
-                errorAlert(); // Tangani error jika tidak ada data respons
-            }
+            console.error('Error:', error);
+            errorAlert();
         }
     }
 
-    // Mengambil data berdasarkan ID untuk edit
     async getDataById(id, checkingEdit) {
         try {
-            const response = await axios.get(`${appUrl}/v1/lab/get/${id}`);
-            const responseData = response.data; // Tidak perlu await lagi di sini
-
-            // Mengisi form modal dengan data yang didapat
-            $('#modal-title').html("Edit Data");
+            const responseData = await this.ajaxRequest(`${appUrl}/v1/lab/get/${id}`, 'GET');
             $('#id').val(responseData.data.id);
             $('#name').val(responseData.data.name);
             $('#location').val(responseData.data.location);
-
-            // Menggenerate preview gambar jika ada
-            generatePreviewImg('form-preview');
             checkingEdit();
         } catch (error) {
             console.log(error);
         }
     }
 
-    // Menghapus data
     async deleteData(id) {
         try {
-            deleteAlert().then(async (result) => {
-                if (result.isConfirmed) {
-                    const response = await axios.delete(`${appUrl}/v1/lab/delete/${id}`);
-                    const responseData = response.data; // Tidak perlu await lagi di sini
+            const result = await confirmDeleteAlert();
+            if (result.isConfirmed) {
+                const responseData = await this.ajaxRequest(`${appUrl}/v1/lab/delete/${id}`, 'DELETE');
+                console.log(responseData);
 
-                    if (responseData.status === 'success') {
-                        successDeleteAlert().then(() => {
-                            this.getAllData();
-                        });
-                    } else {
-                        errorAlert();
-                    }
+
+                if (responseData.status === 'success') {
+                    await successAlert().then(() => {
+                        realoadBrowser();
+                    });
+                } else {
+                    errorAlert();
                 }
-            });
+            }
         } catch (error) {
             errorAlert();
         }
     }
+
 }
 
 export default labService;

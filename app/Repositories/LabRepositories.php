@@ -22,7 +22,7 @@ class LabRepositories implements LabInterfaces
     public function getAllData()
     {
         $data = $this->LabModel::all();
-        if ($data->isEmpty()) {
+        if (!$data) {
             return $this->dataNotFound();
         } else {
             return $this->success($data);
