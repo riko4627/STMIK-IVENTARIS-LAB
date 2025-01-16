@@ -197,7 +197,16 @@ class inventoryService {
             errorAlert();
         }
     }
-
+    async exportData() {
+        try {
+            const result = await categoryAlert();
+            if (result.isConfirmed) {
+                window.location.href = `${appUrl}/v1/inventory/export`;
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
 }
 
 export default inventoryService;

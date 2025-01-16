@@ -66,5 +66,6 @@ Route::prefix('v1')->group(function () {
         Route::get('/get/{id}', 'getDataById');
         Route::post('update/{id}', 'updateData');
         Route::delete('/delete/{id}', 'deleteData');
+        Route::get('export', 'export');
     });
 });

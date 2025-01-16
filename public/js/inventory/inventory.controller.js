@@ -92,6 +92,12 @@ $(document).ready(function () {
         inventoryservice.deleteData(id);
     });
 
+    $('#export').on('click', function (e) {
+        console.log('Export clicked');
+        e.preventDefault()
+        inventoryservice.exportData()
+    })
+
     $('#forminventoryModal').on('hidden.bs.modal', function () {
         $('#id').val('');
         $('#item_name').val('');
