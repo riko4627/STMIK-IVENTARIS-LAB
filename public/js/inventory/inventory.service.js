@@ -85,7 +85,7 @@ class inventoryService {
     populateCategoryDropdown(categories) {
         const categorySelect = $('#id_category');
         categorySelect.empty();
-        categorySelect.append('<option value="" selected disabled hidden>Choose here</option>');
+        categorySelect.append('<option value="" selected disabled hidden>- Pilih -</option>');
 
         $.each(categories, function(index, category) {
             categorySelect.append(`<option value="${category.id}">${category.name}</option>`);
@@ -94,7 +94,7 @@ class inventoryService {
     populateLabDropdown(lab) {
         const labSelect = $('#id_lab');
         labSelect.empty();
-        labSelect.append('<option value="" selected disabled hidden>Choose here</option>');
+        labSelect.append('<option value="" selected disabled hidden>- Pilih -</option>');
 
         $.each(lab, function(index, lab) {
             labSelect.append(`<option value="${lab.id}">${lab.name}</option>`);
@@ -103,7 +103,7 @@ class inventoryService {
     populateYearDropdown(year) {
         const yearSelect = $('#id_year');
         yearSelect.empty();
-        yearSelect.append('<option value="" selected disabled hidden>Choose here</option>');
+        yearSelect.append('<option value="" selected disabled hidden>- Pilih -</option>');
 
         $.each(year, function(index, year) {
             yearSelect.append(`<option value="${year.id}">${year.year}</option>`);

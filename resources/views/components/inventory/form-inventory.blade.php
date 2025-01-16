@@ -18,35 +18,35 @@
                                  <input type="hidden" name="id" id="id" value="">
                                  <label>Nama barang </label>
                                  <input id="item_name" name="item_name" type="text" class="form-control"
-                                     placeholder="Nama Ruangan" autocomplete="off">
+                                     placeholder="Nama Barang" autocomplete="off">
                              </div>
                          </div>
                          <div class="col-md-12 mt-3">
                              <div class="modal-group fill modal-show-validation">
                                  <label>Jumlah barang</label>
                                  <input id="total_items" name="total_item" type="text" class="form-control"
-                                     placeholder="Lantai Keberapa" autocomplete="off">
+                                     placeholder="Jumlah barang" autocomplete="off">
                              </div>
                          </div>
                          <div class="col-md-12 mt-3">
                              <div class="modal-group fill modal-show-validation">
                                  <label>Jumlah barang baik</label>
                                  <input id="total_items_good" name="total_items_good" type="text" class="form-control"
-                                     placeholder="Lantai Keberapa" autocomplete="off">
+                                     placeholder="Jumlah Barang Baik" autocomplete="off">
                              </div>
                          </div>
                          <div class="col-md-12 mt-3">
                              <div class="modal-group fill modal-show-validation">
                                  <label>Jumlah barang rusak</label>
                                  <input id="total_items_crash" name="total_items_crash" type="text" class="form-control"
-                                     placeholder="Lantai Keberapa" autocomplete="off">
+                                     placeholder="Jumlah Barang Rusak" autocomplete="off">
                              </div>
                          </div>
                          <div class="col-md-12 mt-3">
                              <div class="modal-group fill modal-show-validation">
                                  <label>Spesifikasi</label>
                                  <input id="spesification" name="spesification" type="text" class="form-control"
-                                     placeholder="Lantai Keberapa" autocomplete="off">
+                                     placeholder="Spesifikasi" autocomplete="off">
                              </div>
                          </div>
                          <div class="col-md-12 mt-3">
