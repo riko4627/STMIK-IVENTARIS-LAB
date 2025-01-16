@@ -15,14 +15,13 @@ class InventoryModel extends Model
     protected $fillable = [
         'id',
         'item_name',
-        'total_item',
+        'total_items',
         'total_items_good',
         'total_items_crash',
         'spesification',
         'id_lab',
         'id_year',
         'id_category',
-        'img_inventaris',
         'created_at',
         'update_at'
     ];

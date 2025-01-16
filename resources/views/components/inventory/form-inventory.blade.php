@@ -24,7 +24,7 @@
                          <div class="col-md-12 mt-3">
                              <div class="modal-group fill modal-show-validation">
                                  <label>Jumlah barang</label>
-                                 <input id="total_items" name="total_item" type="text" class="form-control"
+                                 <input id="total_items" name="total_items" type="text" class="form-control"
                                      placeholder="Lantai Keberapa" autocomplete="off">
                              </div>
                          </div>
