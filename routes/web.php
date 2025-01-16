@@ -20,6 +20,9 @@ Route::get('/lab', function () {
 Route::get('/year', function () {
     return view('pages.year');
 });
+Route::get('/inventory', function () {
+    return view('pages.inventory');
+});
 
 Route::get('/dashboard', function () {
     return view('admin.Dashboard');
