@@ -19,17 +19,18 @@ class InventoryExport implements FromCollection, WithHeadings
             'total_items_good',
             'total_items_crash',
             'spesification',
-            'category.name as category_name', // Ambil nama kategori
-            'lab.name as lab_name',           // Ambil nama lab
-            'year.year as year_name'          // Ambil nama tahun
+            'tb_category.name as category_name', // Ambil nama kategori dari tb_category
+            'tb_lab.name as lab_name',           // Ambil nama lab dari tb_lab
+            'tb_year.year as year_name'          // Ambil nama tahun dari tb_year
         )
-        ->join('category', 'inventory.id_category', '=', 'category.id')
-        ->join('lab', 'inventory.id_lab', '=', 'lab.id')
-        ->join('year', 'inventory.id_year', '=', 'year.id')
+        ->join('tb_category', 'tb_inventory.id_category', '=', 'tb_category.id') // Sesuaikan nama tabel
+        ->join('tb_lab', 'tb_inventory.id_lab', '=', 'tb_lab.id')               // Sesuaikan nama tabel
+        ->join('tb_year', 'tb_inventory.id_year', '=', 'tb_year.id')            // Sesuaikan nama tabel
         ->get();
-
+    
         return $dataInventory;
     }
+     
 
     public function headings(): array
     {

@@ -24,8 +24,8 @@
                          <div class="col-md-12 mt-3">
                              <div class="modal-group fill modal-show-validation">
                                  <label>Jumlah barang</label>
-                                 <input id="total_items" name="total_item" type="text" class="form-control"
-                                     placeholder="Jumlah barang" autocomplete="off">
+                                 <input id="total_items" name="total_items" type="text" class="form-control"
+                                     placeholder="Lantai Keberapa" autocomplete="off">
                              </div>
                          </div>
                          <div class="col-md-12 mt-3">
@@ -39,41 +39,41 @@
                              <div class="modal-group fill modal-show-validation">
                                  <label>Jumlah barang rusak</label>
                                  <input id="total_items_crash" name="total_items_crash" type="text" class="form-control"
-                                     placeholder="Jumlah Barang Rusak" autocomplete="off">
+                                     placeholder="Jumlah Barang Rusak" autocomplete="off" disabled>
+                                 <input type="hidden" id="hidden_total_items_crash" name="total_items_crash">
                              </div>
                          </div>
+                         <div class="col-md-12 mt-3">
+                            <div class="modal-group fill modal-show-validation">
+                                <label>Kategori</label>
+                                   <select name="id_category" id="id_category" class="form-control">
+                                       <option value="" selected disabled hidden>Choose here</option>
+                                       <!-- Kategori diambil dari tabel kategori -->
+                                   </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <div class="modal-group fill modal-show-validation">
+                                <label>Lab</label>
+                                   <select name="id_lab" id="id_lab" class="form-control">
+                                       <option value="" selected disabled hidden>Choose here</option>
+                                       <!-- Kategori diambil dari tabel kategori -->
+                                   </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <div class="modal-group fill modal-show-validation">
+                                <label>Tahun</label>
+                                   <select name="id_year" id="id_year" class="form-control">
+                                       <option value="" selected disabled hidden>Choose here</option>
+                                       <!-- Kategori diambil dari tabel kategori -->
+                                   </select>
+                            </div>
+                        </div>
                          <div class="col-md-12 mt-3">
                              <div class="modal-group fill modal-show-validation">
                                  <label>Spesifikasi</label>
-                                 <input id="spesification" name="spesification" type="text" class="form-control"
-                                     placeholder="Spesifikasi" autocomplete="off">
-                             </div>
-                         </div>
-                         <div class="col-md-12 mt-3">
-                             <div class="modal-group fill modal-show-validation">
-                                 <label>Kategori</label>
-                                    <select name="id_category" id="id_category" class="form-control">
-                                        <option value="" selected disabled hidden>Choose here</option>
-                                        <!-- Kategori diambil dari tabel kategori -->
-                                    </select>
-                             </div>
-                         </div>
-                         <div class="col-md-12 mt-3">
-                             <div class="modal-group fill modal-show-validation">
-                                 <label>Lab</label>
-                                    <select name="id_lab" id="id_lab" class="form-control">
-                                        <option value="" selected disabled hidden>Choose here</option>
-                                        <!-- Kategori diambil dari tabel kategori -->
-                                    </select>
-                             </div>
-                         </div>
-                         <div class="col-md-12 mt-3">
-                             <div class="modal-group fill modal-show-validation">
-                                 <label>Tahun</label>
-                                    <select name="id_year" id="id_year" class="form-control">
-                                        <option value="" selected disabled hidden>Choose here</option>
-                                        <!-- Kategori diambil dari tabel kategori -->
-                                    </select>
+                                 <textarea id="summernote" name="spesification"></textarea>
                              </div>
                          </div>
                      </div>

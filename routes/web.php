@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\CMS\LabController;
 use App\Http\Controllers\CMS\CategoryController;
+use App\Http\Controllers\CMS\UserController;
 use App\Http\Controllers\CMS\InventoryController;
 use App\Http\Controllers\CMS\YearController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,8 +28,8 @@ Route::get('/dashboard', function () {
     return view('admin.Dashboard');
 });
 
-Route::get('/user', function () {
-    return view('admin.User');
+Route::get('/users', function () {
+    return view('pages.users');
 });
 
 Route::prefix('v1')->group(function () {
@@ -67,5 +69,13 @@ Route::prefix('v1')->group(function () {
         Route::post('update/{id}', 'updateData');
         Route::delete('/delete/{id}', 'deleteData');
         Route::get('export', 'export');
+    });
+
+    Route::prefix('users')->controller(UserController::class)->group(function () {
+        Route::get('/', 'getAllData');
+        Route::post('/create', 'createData');
+        Route::get('/get/{id}', 'getDataById');
+        Route::post('/update/{id}', 'updateData');
+        Route::delete('/delete/{id}', 'deleteData');
     });
 });

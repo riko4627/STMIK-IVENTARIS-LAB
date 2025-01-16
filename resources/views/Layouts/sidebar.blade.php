@@ -28,9 +28,9 @@
                     </a>
                 </li>
 
-                <li class="nav-item {{ request()->is('/user*') ? 'active' : '' }}">
-                    <a href="{{ url('/user') }}">
-                        <i class="fas fa-user"></i>
+                <li class="nav-item {{ request()->is('/users*') ? 'active' : '' }}">
+                    <a href="{{ url('/users') }}">
+                        <i class="fas fa-door-open"></i>
                         <p>Pengguna</p>
                     </a>
                 </li>

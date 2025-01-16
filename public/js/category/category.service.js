@@ -1,23 +1,36 @@
 class categoryService {
+    async ajaxRequest(url, method, formData) {
+        try {
+            const response = await $.ajax({
+                url: url,
+                type: method,
+                data: formData,
+                processData: false,
+                contentType: false
+            });
+            return response;
+        } catch (jqXHR) {
+            // Memastikan error ditangkap dengan benar
+            throw {
+                status: jqXHR.status,
+                responseJSON: jqXHR.responseJSON
+            };
+        }
+    }
+
     async getAllData() {
-        $('#dataTable').DataTable().destroy();
+        if ($.fn.dataTable.isDataTable('#dataTable')) {
+            $('#dataTable').DataTable().clear().destroy();
+        }
+
         $("#dataTable tbody").empty();
 
-        let dataTable = $('#dataTable').DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-        });
-
         try {
-            const response = await axios.get(`${appUrl}/v1/category/`)
-            const responseData = await response.data
+            const responseData = await this.ajaxRequest(`${appUrl}/v1/category/`, 'GET');
             console.log(responseData);
-
 
             if (responseData && responseData.data) {
                 let tableBody = '';
-
                 responseData.data.forEach((item, index) => {
                     tableBody += `
                     <tr>
@@ -38,8 +51,14 @@ class categoryService {
                 // Tambahkan baris ke tbody
                 $("#dataTable tbody").html(tableBody);
 
-                // Reload DataTable dengan data baru
-                dataTable.rows.add($('#dataTable tbody tr')).draw();
+                $('#dataTable').DataTable({
+                    paging: true,
+                    responsive: true,
+                    pageLength: 5,
+                    order: [[0, 'asc']],
+                    lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
+                });
+
             } else {
                 console.error('Response data is invalid:', responseData);
             }
@@ -48,60 +67,65 @@ class categoryService {
         }
     }
 
-
     async createData(e, checkingEdit) {
         let submitButton = $(e.target).find(':submit')
         try {
             const formData = new FormData(e.target)
+            const name = formData.get('name');
+
             if (checkingEdit()) {
                 const id = $('#id').val()
-                const response = await axios.post(`${appUrl}/v1/category/update/${id}`, formData)
-                const responseData = await response.data
+                const responseData = await this.ajaxRequest(`${appUrl}/v1/category/update/${id}`, 'POST', formData);
+                console.log(responseData);
                 if (responseData.status === 'success') {
-                    successUpdateAlert().then(() => {
+                    successAlert().then(() => {
                         $('#formCategoryModal').modal('hide')
-                        this.getAllData()
+                        realoadBrowser();
                     })
                 } else {
                     errorAlert()
                 }
             } else {
                 submitButton.attr('disabled', true)
-                const response = await axios.post(`${appUrl}/v1/category/create`, formData)
-                const responseData = await response.data
-                console.log(responseData)
+                const responseData = await this.ajaxRequest(`${appUrl}/v1/category/create`, 'POST', formData);
+                console.log(responseData);
+
                 if (responseData.status === 'success') {
                     successAlert().then(() => {
-                        $('#formCategoryModal').modal('hide')
-                    })
-                    this.getAllData()
+                        realoadBrowser();
+                        $('#formCategoryModal').modal('hide');
+                    });
                     submitButton.attr('disabled', false)
                 } else {
-                    errorAlert()
-                    submitButton.attr('disabled', false)
+                    errorAlert();
                 }
+                submitButton.attr('disabled', false)
             }
         } catch (error) {
             submitButton.attr('disabled', false)
-            console.log(error)
-            if (error.response.data.name == 'Nama kategori sudah ada') {
-                categoryAlert()
-            } else if (error.response.status == 422) {
-                warningAlert()
+            console.log('error: ', error);
+
+            // Membaca respon dari error
+            const responseData = error.responseJSON || error.responseData || null;
+
+            if (responseData?.status === 'not validate') {
+                warningAlert('Form tidak boleh kosong!');
+                return;
+            } else if (responseData?.message === 'Nama kategori sudah ada') {
+                categoryAlert();
             } else {
-                errorAlert()
+                errorAlert();
             }
         };
     }
 
     async getDataById(id, checkingEdit) {
         try {
-            const response = await axios.get(`${appUrl}/v1/category/get/${id}`)
-            const responseData = await response.data
+            const responseData = await this.ajaxRequest(`${appUrl}/v1/category/get/${id}`, 'GET');
+            console.log(responseData);
             $('#modal-title').html("Edit Data")
             $('#id').val(responseData.data.id)
             $('#name').val(responseData.data.name)
-            generatePreviewImg('form-preview')
             checkingEdit()
         } catch (error) {
             console.log(error)
@@ -110,13 +134,13 @@ class categoryService {
 
     async deleteData(id) {
         try {
-            deleteAlert().then(async (result) => {
+            confirmDeleteAlert().then(async (result) => {
                 if (result.isConfirmed) {
-                    const response = await axios.delete(`${appUrl}/v1/category/delete/${id}`)
-                    const responseData = await response.data
+                    const responseData = await this.ajaxRequest(`${appUrl}/v1/category/delete/${id}`, 'DELETE');
+                    console.log(responseData);
                     if (responseData.status === 'success') {
-                        successDeleteAlert().then(() => {
-                            this.getAllData()
+                        successAlert().then(() => {
+                            realoadBrowser();
                         })
                     } else {
                         errorAlert()
@@ -127,6 +151,8 @@ class categoryService {
             errorAlert()
         }
     }
+
+
 }
 
 export default categoryService;

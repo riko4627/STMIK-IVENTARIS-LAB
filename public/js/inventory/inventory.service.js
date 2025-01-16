@@ -30,7 +30,7 @@ class inventoryService {
 
             const yearResponse = await this.ajaxRequest(`${appUrl}/v1/year`, 'GET');
             const year = yearResponse.data;
-            
+
             this.populateCategoryDropdown(categories);
             this.populateLabDropdown(lab);
             this.populateYearDropdown(year);
@@ -49,9 +49,9 @@ class inventoryService {
                         <td>${item.total_items_good}</td>
                         <td>${item.total_items_crash}</td>
                         <td>${item.spesification}</td>
-                        <td>${item.id_category.name}</td>
-                        <td>${item.id_lab.name}</td>
-                        <td>${item.id_year.year}</td>
+                        <td>${item.category.name}</td>
+                        <td>${item.lab.name}</td>
+                        <td>${item.year.year}</td>
                         <td class="text-center">
                             <button class="btn btn-outline-primary btn-sm edit-modal mr-1" data-toggle="modal" data-target="#forminventoryModal" data-id="${item.id}">
                                 <i class="fas fa-edit"></i>
@@ -80,14 +80,14 @@ class inventoryService {
         } catch (error) {
             console.error('Error fetching data:', error);
         }
-        
+
     }
     populateCategoryDropdown(categories) {
         const categorySelect = $('#id_category');
         categorySelect.empty();
         categorySelect.append('<option value="" selected disabled hidden>- Pilih -</option>');
 
-        $.each(categories, function(index, category) {
+        $.each(categories, function (index, category) {
             categorySelect.append(`<option value="${category.id}">${category.name}</option>`);
         });
     }
@@ -96,7 +96,7 @@ class inventoryService {
         labSelect.empty();
         labSelect.append('<option value="" selected disabled hidden>- Pilih -</option>');
 
-        $.each(lab, function(index, lab) {
+        $.each(lab, function (index, lab) {
             labSelect.append(`<option value="${lab.id}">${lab.name}</option>`);
         });
     }
@@ -105,7 +105,7 @@ class inventoryService {
         yearSelect.empty();
         yearSelect.append('<option value="" selected disabled hidden>- Pilih -</option>');
 
-        $.each(year, function(index, year) {
+        $.each(year, function (index, year) {
             yearSelect.append(`<option value="${year.id}">${year.year}</option>`);
         });
     }
@@ -119,7 +119,7 @@ class inventoryService {
                 const id = $('#id').val();
                 const responseData = await this.ajaxRequest(`${appUrl}/v1/inventory/update/${id}`, 'POST', formData);
                 console.log(responseData);
-                
+
 
                 if (responseData.status === 'success') {
                     successAlert().then(() => {
@@ -134,6 +134,7 @@ class inventoryService {
             } else {
                 submitButton.attr('disabled', true);
                 const responseData = await this.ajaxRequest(`${appUrl}/v1/inventory/create`, 'POST', formData);
+                console.log(responseData);
 
                 if (responseData.status === 'success') {
                     successAlert().then(() => {
@@ -170,7 +171,7 @@ class inventoryService {
             const categoryResponse = await axios.get(`${appUrl}/v1/category`);
             const categories = categoryResponse.data;
             this.populateCategoryDropdown(categories); // Populate the dropdown
-            $('#id_category').val(responseData.data.id_category); 
+            $('#id_category').val(responseData.data.id_category);
             checkingEdit();
         } catch (error) {
             console.log(error);
@@ -179,7 +180,7 @@ class inventoryService {
 
     async deleteData(id) {
         try {
-            const result = await confirmDeleteAlert(); 
+            const result = await confirmDeleteAlert();
             if (result.isConfirmed) {
                 const responseData = await this.ajaxRequest(`${appUrl}/v1/inventory/delete/${id}`, 'DELETE');
                 console.log(responseData);

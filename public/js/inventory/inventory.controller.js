@@ -12,12 +12,11 @@ $(document).ready(function () {
                 },
                 total_items: {
                     required: true,
+                    number: true
                 },
                 total_items_good: {
                     required: true,
-                },
-                total_items_crash: {
-                    required: true,
+                    number: true
                 },
                 spesification: {
                     required: true,
@@ -29,12 +28,11 @@ $(document).ready(function () {
                 },
                 total_items: {
                     required: "Form tidak boleh kosong",
+                    number: 'form harus angka'
                 },
                 total_items_good: {
                     required: "Form tidak boleh kosong",
-                },
-                total_items_crash: {
-                    required: "Form tidak boleh kosong",
+                    number: 'form harus angka'
                 },
                 spesification: {
                     required: "Form tidak boleh kosong",
@@ -97,6 +95,24 @@ $(document).ready(function () {
         e.preventDefault()
         inventoryservice.exportData()
     })
+
+    $('#total_items, #total_items_good').on('input', function () {
+        const totalItems = parseInt($('#total_items').val()) || 0;
+        const totalItemsGood = parseInt($('#total_items_good').val()) || 0;
+    
+        // Hitung total item rusak
+        const totalItemsCrash = totalItems - totalItemsGood;
+        const crashValue = totalItemsCrash < 0 ? 0 : totalItemsCrash;
+    
+        // Set nilai pada input yang di-disable dan input hidden
+        $('#total_items_crash').val(crashValue);
+        $('#hidden_total_items_crash').val(crashValue);
+    });
+    
+    $(document).ready(function() {
+        $('#summernote').summernote();
+      });    
+    
 
     $('#forminventoryModal').on('hidden.bs.modal', function () {
         $('#id').val('');

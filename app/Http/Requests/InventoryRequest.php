@@ -20,9 +20,9 @@ class InventoryRequest extends FormRequest
     {
         return [
             'item_name' => 'required',
-            'total_items' => 'required',
-            'total_items_good' => 'required',
-            'total_items_crash' => 'required',
+            'total_items' => 'required|integer',
+            'total_items_good' => 'required|integer',
+            'total_items_crash' => 'required|integer',
             'spesification' => 'required'
         ];
     }
