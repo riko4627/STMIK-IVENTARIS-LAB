@@ -17,6 +17,9 @@ $(document).ready(function () {
                     minlength: 1,
                     maxlength: 30
                 },
+                role: {
+                    required: true
+                },
                 email: {
                     required: true,
                     email: true,
@@ -42,6 +45,9 @@ $(document).ready(function () {
                     required: "Username tidak boleh kosong",
                     minlength: "Username minimal 3 karakter",
                     maxlength: "Username maksimal 30 karakter"
+                },
+                role: {
+                    required: "Silahkan pilih pengguna"
                 },
                 email: {
                     required: "Email tidak boleh kosong",

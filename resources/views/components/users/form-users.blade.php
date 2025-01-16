@@ -35,11 +35,25 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group fill modal-show-validation">
+                                <label for="role">Role</label>
+                                <select id="role" name="role" class="form-control">
+                                    <option value="">Pilih Posisi</option>
+                                    <option value="super admin">Super Admin</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group fill modal-show-validation">
                                 <label for="email">Email</label>
                                 <input id="email" name="email" type="email" class="form-control"
                                     placeholder="Alamat Email" autocomplete="off">
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Baris ketiga dengan 2 kolom -->
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group fill modal-show-validation">
                                 <label for="password">Password</label>
@@ -47,11 +61,7 @@
                                     placeholder="Kata Sandi" autocomplete="off">
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Baris ketiga dengan 1 kolom penuh -->
-                    <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group fill modal-show-validation">
                                 <label for="password_confirmation">Konfirmasi Password</label>
                                 <input id="password_confirmation" name="password_confirmation" type="password"
