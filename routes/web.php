@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CMS\LabController;
 use App\Http\Controllers\CMS\CategoryController;
 use App\Http\Controllers\CMS\UserController;
@@ -7,6 +8,13 @@ use App\Http\Controllers\CMS\InventoryController;
 use App\Http\Controllers\CMS\YearController;
 
 use Illuminate\Support\Facades\Route;
+
+
+Route::post('v1/login', [AuthController::class, 'login']);
+Route::post('v1/logout', [AuthController::class, 'logout']);
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
 Route::get('/', function () {
     return view('admin.Dashboard');

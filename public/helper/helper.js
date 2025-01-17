@@ -60,6 +60,15 @@ function warningAlert(message) {
 function realoadBrowser() {
     window.location.reload();
 }
+function emailOrPasswordWrong() {
+    return Swal.fire({
+        title: 'Peringatan',
+        text: 'username atau password anda salah !',
+        icon: 'warning',
+        timer: 5000,
+        showConfirmButton: true
+    });
+}
 
 // alert confirm message
 function confirmDeleteAlert(message) {
