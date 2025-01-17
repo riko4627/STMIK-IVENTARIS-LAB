@@ -34,6 +34,7 @@ class usersService {
                         <td>${index + 1}</td>
                         <td>${item.name}</td>
                         <td>${item.username}</td>
+                        <td>${item.role}</td>
                         <td>${item.email}</td>
 
                         <td class="text-center">
@@ -71,9 +72,17 @@ class usersService {
         try {
             const formData = new FormData(e.target);
 
+            // Hanya tambahkan field yang diisi (tidak kosong)
+            const filteredData = new FormData();
+            for (const [key, value] of formData.entries()) {
+                if (value) {
+                    filteredData.append(key, value);
+                }
+            }
+
             if (checkingEdit()) {
                 const id = $('#id').val();
-                const responseData = await this.ajaxRequest(`${appUrl}/v1/users/update/${id}`, 'POST', formData);
+                const responseData = await this.ajaxRequest(`${appUrl}/v1/users/update/${id}`, 'POST', filteredData);
 
                 if (responseData.status === 'success') {
                     successAlert().then(() => {
@@ -87,7 +96,7 @@ class usersService {
                 }
             } else {
                 submitButton.attr('disabled', true);
-                const responseData = await this.ajaxRequest(`${appUrl}/v1/users/create`, 'POST', formData);
+                const responseData = await this.ajaxRequest(`${appUrl}/v1/users/create`, 'POST', filteredData);
                 console.log(responseData);
 
                 if (responseData.status === 'success') {
@@ -109,12 +118,14 @@ class usersService {
         }
     }
 
+
     async getDataById(id, checkingEdit) {
         try {
             const responseData = await this.ajaxRequest(`${appUrl}/v1/users/get/${id}`, 'GET');
             $('#id').val(responseData.data.id);
             $('#name').val(responseData.data.name);
             $('#username').val(responseData.data.username);
+            $('#role').val(responseData.data.role);
             $('#email').val(responseData.data.email);
             $('#password').val(responseData.data.password);
 

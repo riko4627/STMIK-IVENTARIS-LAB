@@ -31,6 +31,7 @@ class UserRepositories implements UserInterfaces
             $data = new $this->userModel;
             $data->name = $request->input('name');
             $data->username = $request->input('username');
+            $data->role = $request->input('role');
             $data->email = $request->input('email');
             $data->password =  Hash::make($request->input('password'));
 
@@ -53,23 +54,34 @@ class UserRepositories implements UserInterfaces
     public function updateData(UserRequest $request, $id)
     {
         try {
+            // Cari data berdasarkan ID
             $data = $this->userModel::findOrFail($id);
 
+            // Update data utama
             $data->name = $request->input('name');
             $data->username = $request->input('username');
+            $data->role = $request->input('role');
             $data->email = $request->input('email');
 
-            if ($request->input('password')) {
+            // Update password jika ada input
+            if ($request->filled('password')) {
                 $data->password = Hash::make($request->input('password'));
             }
 
+            // Simpan perubahan
             $data->save();
 
-            return $this->success($data);
+            // Return response sukses
+            return $this->success([
+                'message' => 'Data berhasil diperbarui',
+                'data' => $data
+            ]);
         } catch (\Throwable $th) {
+            // Tangani error
             return $this->error($th->getMessage(), 400, $th, class_basename($this), __FUNCTION__);
         }
     }
+
     public function deleteData($id)
     {
         try {

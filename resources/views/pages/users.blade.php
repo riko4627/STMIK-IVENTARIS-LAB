@@ -12,6 +12,7 @@
                         <th>No</th>
                         <th>Name</th>
                         <th>Username</th>
+                        <th>Posisi</th>
                         <th>Email</th>
                         <th>Aksi</th>
                     </tr>
