@@ -89,3 +89,12 @@ function categoryAlert() {
     });
 }
 
+function successLogin() {
+    Swal.fire({
+        title: 'Login Berhasil!',
+        text: message,
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1000,
+    })
+}

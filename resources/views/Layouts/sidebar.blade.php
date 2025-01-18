@@ -21,14 +21,14 @@
                 </div>
             </div>
             <ul class="nav nav-primary">
-                <li class="nav-item {{ request()->is('/dashboard*') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->is('dashboard*') ? 'active' : '' }}">
                     <a href="{{ url('/dashboard') }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
 
-                <li class="nav-item {{ request()->is('/users*') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->is('users*') ? 'active' : '' }}">
                     <a href="{{ url('/users') }}">
                         <i class="fas fa-door-open"></i>
                         <p>Pengguna</p>
@@ -40,19 +40,19 @@
                         <p>Tahun</p>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->is('/lab*') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->is('lab*') ? 'active' : '' }}">
                     <a href="{{ url('/lab') }}">
                         <i class="fas fa-door-open"></i>
                         <p>Ruang Lab</p>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->is('/category*') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->is('category*') ? 'active' : '' }}">
                     <a href="{{ url('/category') }}">
                         <i class="fas fa-hashtag"></i>
                         <p>Kategori Barang</p>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->is('/inventory*') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->is('inventory*') ? 'active' : '' }}">
                     <a href="{{ url('/inventory') }}">
                         <i class="fas fa-hashtag"></i>
                         <p>Inventaris Barang</p>
