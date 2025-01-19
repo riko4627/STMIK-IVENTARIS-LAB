@@ -49,9 +49,9 @@ class inventoryService {
                         <td>${item.total_items_good}</td>
                         <td>${item.total_items_crash}</td>
                         <td>${item.spesification}</td>
-                        <td>${item.id_category.name}</td>
-                        <td>${item.id_lab.name}</td>
-                        <td>${item.id_year.year}</td>
+                        <td>${item.category.name}</td>
+                        <td>${item.lab.name}</td>
+                        <td>${item.year.year}</td>
                         <td class="text-center">
                             <button class="btn btn-outline-primary btn-sm edit-modal mr-1" data-toggle="modal" data-target="#forminventoryModal" data-id="${item.id}">
                                 <i class="fas fa-edit"></i>
@@ -85,7 +85,7 @@ class inventoryService {
     populateCategoryDropdown(categories) {
         const categorySelect = $('#id_category');
         categorySelect.empty();
-        categorySelect.append('<option value="" selected disabled hidden>Choose here</option>');
+        categorySelect.append('<option value="" selected disabled hidden>- Pilih -</option>');
 
         $.each(categories, function (index, category) {
             categorySelect.append(`<option value="${category.id}">${category.name}</option>`);
@@ -94,7 +94,7 @@ class inventoryService {
     populateLabDropdown(lab) {
         const labSelect = $('#id_lab');
         labSelect.empty();
-        labSelect.append('<option value="" selected disabled hidden>Choose here</option>');
+        labSelect.append('<option value="" selected disabled hidden>- Pilih -</option>');
 
         $.each(lab, function (index, lab) {
             labSelect.append(`<option value="${lab.id}">${lab.name}</option>`);
@@ -103,7 +103,7 @@ class inventoryService {
     populateYearDropdown(year) {
         const yearSelect = $('#id_year');
         yearSelect.empty();
-        yearSelect.append('<option value="" selected disabled hidden>Choose here</option>');
+        yearSelect.append('<option value="" selected disabled hidden>- Pilih -</option>');
 
         $.each(year, function (index, year) {
             yearSelect.append(`<option value="${year.id}">${year.year}</option>`);
@@ -198,7 +198,16 @@ class inventoryService {
             errorAlert();
         }
     }
-
+    async exportData() {
+        try {
+            const result = await categoryAlert();
+            if (result.isConfirmed) {
+                window.location.href = `${appUrl}/v1/inventory/export`;
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
 }
 
 export default inventoryService;

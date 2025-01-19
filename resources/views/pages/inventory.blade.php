@@ -2,7 +2,7 @@
 @section('content')
     <div class="card">
         <x-base-header headerTitle="Inventaris Barang" headerIcon="fas fa-box" buttonAdd="true" headerAddButton="Tambah Data"
-        formId="#forminventoryModal" buttonExport="false" exportId="exportCategory">
+        formId="#forminventoryModal" buttonExport="true" exportId="export">
         </x-base-header>
         <x-base-body>
             <x-base-table initId="dataTable">
