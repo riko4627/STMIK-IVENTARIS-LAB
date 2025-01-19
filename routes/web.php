@@ -7,9 +7,6 @@ use App\Http\Controllers\CMS\InventoryController;
 use App\Http\Controllers\CMS\YearController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', function (){
-    return view('auth.login');
-});
 Route::get('/', function () {
     return view('admin.Dashboard');
 });
