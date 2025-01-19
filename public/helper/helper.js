@@ -88,13 +88,3 @@ function categoryAlert() {
         timer: 3000,
     });
 }
-
-function successLogin() {
-    Swal.fire({
-        title: 'Login Berhasil!',
-        text: message,
-        icon: 'success',
-        showConfirmButton: false,
-        timer: 1000,
-    })
-}
