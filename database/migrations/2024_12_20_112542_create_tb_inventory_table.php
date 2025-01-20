@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignUuid('id_lab')->constrained('tb_lab');
             $table->foreignUuid('id_year')->constrained('tb_year');
             $table->foreignUuid('id_category')->constrained('tb_category');
+            $table->foreignUuid('created_by')->constrained('users');
             $table->text('spesification');
             $table->timestamps();
         });

@@ -4,17 +4,17 @@ $(document).ready(function () {
     const usersservice = new usersService()
     usersservice.getAllData();
 
-    function validation() {
+    function validation(isUpdate = false) {
         $('#formTambah').validate({
             rules: {
                 name: {
                     required: true,
-                    minlength: 1,
+                    minlength: 3,
                     maxlength: 50
                 },
                 username: {
                     required: true,
-                    minlength: 1,
+                    minlength: 3,
                     maxlength: 30
                 },
                 role: {
@@ -26,13 +26,13 @@ $(document).ready(function () {
                     maxlength: 50
                 },
                 password: {
-                    required: true,
-                    minlength: 6,
+                    required: !isUpdate,
+                    minlength: 8,
                     maxlength: 20
                 },
                 password_confirmation: {
-                    required: true,
-                    equalTo: "#password" // Harus sama dengan password
+                    required: !isUpdate,
+                    equalTo: "#password"
                 }
             },
             messages: {
@@ -47,7 +47,7 @@ $(document).ready(function () {
                     maxlength: "Username maksimal 30 karakter"
                 },
                 role: {
-                    required: "Silahkan pilih pengguna"
+                    required: "Silahkan pilih role pengguna"
                 },
                 email: {
                     required: "Email tidak boleh kosong",
@@ -56,7 +56,7 @@ $(document).ready(function () {
                 },
                 password: {
                     required: "Password tidak boleh kosong",
-                    minlength: "Password minimal 6 karakter",
+                    minlength: "Password minimal 8 karakter",
                     maxlength: "Password maksimal 20 karakter"
                 },
                 password_confirmation: {
@@ -64,7 +64,6 @@ $(document).ready(function () {
                     equalTo: "Konfirmasi password harus sama dengan password"
                 }
             },
-
             highlight: function (element) {
                 $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
             },
@@ -80,8 +79,8 @@ $(document).ready(function () {
         });
     }
 
+    validation(true);
 
-    validation();
 
     $('#name, #username, #email, #password, #password_confirmation').on('input', function () {
         $(this).valid();
@@ -107,20 +106,24 @@ $(document).ready(function () {
     });
 
     $('#formUsersModal').on('hidden.bs.modal', function () {
+        $('#formTambah').validate().resetForm();
         $('#id').val('');
         $('#name').val('');
         $('#username').val('');
         $('#email').val('');
         $('#password').val('');
         $('#password_confirmation').val('');
-        $('.form-control').removeClass('is-invalid').removeClass('is-valid');
-        $('.error').remove();
+        $('.form-control').removeClass('is-invalid is-valid');
     });
+
     $('#formUsersModal').on('show.bs.modal', function () {
+        const isEdit = checkingEdit();
+        validation(isEdit);
         $('#modal-title').html(`
-            <i class="fas fa-box ms-2"></i>
-            Form Data
-        `);
+        <i class="fas fa-box ms-2"></i>
+        ${isEdit ? 'Edit Data' : 'Tambah Data'}
+    `);
     });
+
 
 });

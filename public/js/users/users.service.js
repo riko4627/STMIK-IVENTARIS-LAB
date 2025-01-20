@@ -83,6 +83,7 @@ class usersService {
             if (checkingEdit()) {
                 const id = $('#id').val();
                 const responseData = await this.ajaxRequest(`${appUrl}/v1/users/update/${id}`, 'POST', filteredData);
+                console.log(responseData);
 
                 if (responseData.status === 'success') {
                     successAlert().then(() => {

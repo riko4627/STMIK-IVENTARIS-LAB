@@ -1,5 +1,5 @@
  <div class="modal fade" id="forminventoryModal" tabindex="-1" role="dialog" aria-labelledby="labLabel" aria-hidden="true">
-     <div class="modal-dialog" role="document">
+     <div class="modal-dialog modal-lg" role="document">
          <div class="modal-content">
              <div class="modal-header">
                  <h5 class="modal-title" id="modal-title">Tambah Data</h5>
@@ -38,8 +38,8 @@
                          <div class="col-md-12 mt-3">
                              <div class="modal-group fill modal-show-validation">
                                  <label>Jumlah barang rusak</label>
-                                 <input id="total_items_crash" name="total_items_crash" type="text" class="form-control"
-                                     placeholder="Jumlah Barang Rusak" autocomplete="off" disabled>
+                                 <input id="total_items_crash" name="total_items_crash"  type="text" class="form-control"
+                                     placeholder="Jumlah Barang Rusak" autocomplete="off" disabled >
                                  <input type="hidden" id="hidden_total_items_crash" name="total_items_crash">
                              </div>
                          </div>
@@ -73,7 +73,8 @@
                          <div class="col-md-12 mt-3">
                              <div class="modal-group fill modal-show-validation">
                                  <label>Spesifikasi</label>
-                                 <textarea id="summernote" name="spesification"></textarea>
+                                 <textarea name="spesification" id="spesification" class="form-control" style="display: none"></textarea>
+                                 <div id="summernote" ></div>
                              </div>
                          </div>
                      </div>

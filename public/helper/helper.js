@@ -60,6 +60,15 @@ function warningAlert(message) {
 function realoadBrowser() {
     window.location.reload();
 }
+function emailOrPasswordWrong() {
+    return Swal.fire({
+        title: 'Peringatan',
+        text: 'username atau password anda salah !',
+        icon: 'warning',
+        timer: 5000,
+        showConfirmButton: true
+    });
+}
 
 // alert confirm message
 function confirmDeleteAlert(message) {
@@ -86,5 +95,22 @@ function categoryAlert() {
         icon: 'warning',
         showConfirmButton: true,
         timer: 3000,
+    });
+}
+
+function exportAlert(message) {
+    return Swal.fire({
+        title: '<span style="font-size: 22px"> Konfirmasi</span>',
+        text: "Apakah anda yakin?",
+        showCancelButton: true,
+        showConfirmButton: true,
+        cancelButtonText: 'Tidak',
+        confirmButtonText: 'Ya',
+        reverseButtons: true,
+        confirmButtonColor: '#48ABF7',
+        cancelButtonColor: '#EFEFEF',
+        customClass: {
+            cancelButton: 'text-dark'
+        }
     });
 }

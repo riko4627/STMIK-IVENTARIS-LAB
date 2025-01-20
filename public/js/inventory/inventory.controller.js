@@ -91,7 +91,6 @@ $(document).ready(function () {
     });
 
     $('#export').on('click', function (e) {
-        console.log('Export clicked');
         e.preventDefault()
         inventoryservice.exportData()
     })
@@ -99,20 +98,38 @@ $(document).ready(function () {
     $('#total_items, #total_items_good').on('input', function () {
         const totalItems = parseInt($('#total_items').val()) || 0;
         const totalItemsGood = parseInt($('#total_items_good').val()) || 0;
-    
+
         // Hitung total item rusak
         const totalItemsCrash = totalItems - totalItemsGood;
         const crashValue = totalItemsCrash < 0 ? 0 : totalItemsCrash;
-    
+
         // Set nilai pada input yang di-disable dan input hidden
         $('#total_items_crash').val(crashValue);
         $('#hidden_total_items_crash').val(crashValue);
     });
-    
-    $(document).ready(function() {
-        $('#summernote').summernote();
-      });    
-    
+    $('#summernote').summernote({
+        tabsize: 2,
+        height: 180,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['insert', ['link']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ],
+        callbacks: {
+            onInit: function () {
+                const initialContent = $('#spesification').val().trim();
+                $('#summernote').summernote('code', initialContent);
+            },
+            onChange: function (contents) {
+                $('#spesification').val(contents); // Sinkronisasi konten Summernote ke textarea
+            }
+        }
+    });
+
+
 
     $('#forminventoryModal').on('hidden.bs.modal', function () {
         $('#id').val('');

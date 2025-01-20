@@ -42,7 +42,12 @@ class InventoryController extends Controller
     {
         return $this->inventoryRepositories->deleteData($id);
     }
-    public function export() 
+
+    public function getHistory()
+    {
+        return $this->inventoryRepositories->getHistory();
+    }
+    public function export()
     {
         return Excel::download(new InventoryExport, 'Inventory.xlsx');
     }

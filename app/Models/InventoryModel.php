@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class InventoryModel extends Model
 {
-    use HasUuids, HasFactory;
+    use HasUuids, HasFactory, SoftDeletes;
 
     protected $table = 'tb_inventory';
+    protected $dates = ['deleted_at'];
     protected $fillable = [
         'id',
         'item_name',
@@ -37,5 +39,10 @@ class InventoryModel extends Model
     public function year(): BelongsTo
     {
         return $this->belongsTo(YearModel::class, 'id_year', 'id');
+    }
+
+    public function createdBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
 }
