@@ -40,4 +40,9 @@ class InventoryController extends Controller
     {
         return $this->inventoryRepositories->deleteData($id);
     }
+
+    public function getHistory()
+    {
+        return $this->inventoryRepositories->getHistory();
+    }
 }

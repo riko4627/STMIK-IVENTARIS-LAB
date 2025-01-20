@@ -10,7 +10,6 @@ class authService {
             });
             return response;
         } catch (jqXHR) {
-            // Tangani error dan lempar ke `catch` di pemanggil
             throw {
                 status: jqXHR.status,
                 responseJSON: jqXHR.responseJSON || {}
@@ -20,7 +19,6 @@ class authService {
 
     async login(e) {
         try {
-            // Tampilkan loading alert
             Swal.fire({
                 title: 'Loading...',
                 html: 'Please wait while processing...',
@@ -37,16 +35,14 @@ class authService {
             console.log(responseData);
 
             if (responseData.status === 'success') {
-                Swal.close(); // Tutup loading alert
+                Swal.close();
                 successAlert().then(() => {
                     window.location.href = `${appUrl}/`;
                 });
             }
         } catch (error) {
-            Swal.close(); // Tutup loading alert dalam semua kondisi error
+            Swal.close();
             console.error('Error:', error);
-
-            // Tangani error berdasarkan kode status
             if (error.status === 401) {
                 Swal.fire({
                     icon: 'warning',

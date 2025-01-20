@@ -26,7 +26,15 @@
                 <li class="nav-item dropdown hidden-caret">
                     <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                         <div class="my-auto">
-                            <i class="fas fa-sign-out-alt fa-2x text-light" id="iconLogout"></i>
+                            <strong class="text-light ">
+                                @auth
+                                    {{ auth()->user()->name }}
+                                @endauth
+                                @auth
+                                    <span class="user-level">{{ auth()->user()->agency }}</span>
+                                @endauth
+                            </strong>
+                            <i class="fas fa-sign-out-alt text-light" id="iconLogout"></i>
                         </div>
                     </a>
                 </li>

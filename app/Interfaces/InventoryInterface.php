@@ -11,4 +11,5 @@ interface InventoryInterface
     public function getDataById($id);
     public function updateData(InventoryRequest $request, $id);
     public function deleteData($id);
+    public function getHistory();
 }

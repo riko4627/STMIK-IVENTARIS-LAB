@@ -12,6 +12,7 @@ use App\Models\YearModel;
 use App\Traits\HttpResponseTrait;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class InventoryRepositories implements InventoryInterface
@@ -33,9 +34,9 @@ class InventoryRepositories implements InventoryInterface
     public function getAllData()
     {
         $data = $this->inventoryModel->with('category', 'lab', 'year')->get();
-        if(!$data){
+        if (!$data) {
             return $this->dataNotFound();
-        }else{
+        } else {
             return $this->success($data, 'success', 'success get all data inventaris barang');
         }
     }
@@ -44,6 +45,7 @@ class InventoryRepositories implements InventoryInterface
     {
 
         try {
+            $user = Auth::user();
             DB::beginTransaction();
             $data = new $this->inventoryModel;
             $data->item_name = $request->input('item_name');
@@ -54,6 +56,8 @@ class InventoryRepositories implements InventoryInterface
             $data->id_category = $request->input('id_category');
             $data->id_lab = $request->input('id_lab');
             $data->id_year = $request->input('id_year');
+            $data->created_by = $user->id;
+            $data->created_at = Carbon::now('Asia/Makassar');
             $data->save();
             DB::commit();
             return $this->success($data, 'success', 'success create data inventaris barang');
@@ -66,9 +70,9 @@ class InventoryRepositories implements InventoryInterface
     public function getDataById($id)
     {
         $data = $this->inventoryModel->find($id);
-        if(!$data){
+        if (!$data) {
             return $this->dataNotFound();
-        }else{
+        } else {
             return $this->success($data, 'success', 'success get data inventaris barang by id');
         }
     }
@@ -76,9 +80,10 @@ class InventoryRepositories implements InventoryInterface
     public function updateData(InventoryRequest $request, $id)
     {
         try {
+            $user = Auth::user();
             DB::beginTransaction();
             $data = $this->inventoryModel->find($id);
-            if(!$data){
+            if (!$data) {
                 return $this->dataNotFound();
             }
             $data->item_name = $request->input('item_name');
@@ -86,6 +91,8 @@ class InventoryRepositories implements InventoryInterface
             $data->total_items_good = $request->input('total_items_good');
             $data->total_items_crash = $request->input('total_items_crash');
             $data->spesification = $request->input('spesification');
+            $data->created_by = $user->id;
+            $data->updated_at = Carbon::now('Asia/Makassar');
             $data->save();
             DB::commit();
             return $this->success($data, 'success', 'success update data inventaris barang');
@@ -98,16 +105,28 @@ class InventoryRepositories implements InventoryInterface
     public function deleteData($id)
     {
         try {
+            $user = Auth::user();
             $data = $this->inventoryModel->find($id);
-            if(!$data){
+            if (!$data) {
                 return $this->dataNotFound();
             }
-            
+            $data->created_by = $user->id;
             $data->delete();
             return $this->delete();
-
         } catch (\Throwable $th) {
             return $this->error($th->getMessage(), 500);
+        }
+    }
+
+
+    public function getHistory()
+    {
+        $history = $this->inventoryModel::with('createdBy')->withTrashed()
+            ->get();
+        if (!$history) {
+            return $this->dataNotFound();
+        } else {
+            return $this->success($history, 'success', 'success get history');
         }
     }
 }
