@@ -158,25 +158,28 @@ class inventoryService {
     async getDataById(id, checkingEdit) {
         try {
             const responseData = await this.ajaxRequest(`${appUrl}/v1/inventory/get/${id}`, 'GET');
+
             $('#id').val(responseData.data.id);
             $('#item_name').val(responseData.data.item_name);
             $('#total_items').val(responseData.data.total_items);
             $('#total_items_good').val(responseData.data.total_items_good);
             $('#total_items_crash').val(responseData.data.total_items_crash);
-            $('#spesification').val(responseData.data.spesification);
+            $('#hidden_total_items_crash').val(responseData.data.total_items_crash);
+            console.log(responseData.data.total_items_crash);
+
             $('#id_category').val(responseData.data.id_category);
             $('#id_lab').val(responseData.data.id_lab);
             $('#id_year').val(responseData.data.id_year);
+            const spesification = responseData.data.spesification || '';
+            $('#summernote').summernote('code', spesification);
+            $('#spesification').val(spesification);
 
-            const categoryResponse = await axios.get(`${appUrl}/v1/category`);
-            const categories = categoryResponse.data;
-            this.populateCategoryDropdown(categories); // Populate the dropdown
-            $('#id_category').val(responseData.data.id_category);
             checkingEdit();
         } catch (error) {
             console.log(error);
         }
     }
+
 
     async deleteData(id) {
         try {
@@ -200,7 +203,7 @@ class inventoryService {
     }
     async exportData() {
         try {
-            const result = await categoryAlert();
+            const result = await exportAlert();
             if (result.isConfirmed) {
                 window.location.href = `${appUrl}/v1/inventory/export`;
             }

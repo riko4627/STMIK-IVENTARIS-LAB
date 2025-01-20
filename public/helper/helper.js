@@ -97,3 +97,20 @@ function categoryAlert() {
         timer: 3000,
     });
 }
+
+function exportAlert(message) {
+    return Swal.fire({
+        title: '<span style="font-size: 22px"> Konfirmasi</span>',
+        text: "Apakah anda yakin?",
+        showCancelButton: true,
+        showConfirmButton: true,
+        cancelButtonText: 'Tidak',
+        confirmButtonText: 'Ya',
+        reverseButtons: true,
+        confirmButtonColor: '#48ABF7',
+        cancelButtonColor: '#EFEFEF',
+        customClass: {
+            cancelButton: 'text-dark'
+        }
+    });
+}
