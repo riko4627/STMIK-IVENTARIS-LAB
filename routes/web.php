@@ -6,7 +6,6 @@ use App\Http\Controllers\CMS\CategoryController;
 use App\Http\Controllers\CMS\UserController;
 use App\Http\Controllers\CMS\InventoryController;
 use App\Http\Controllers\CMS\YearController;
-
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,6 +27,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/year', function () {
         return view('pages.year');
     });
+
     Route::get('/inventory', function () {
         return view('pages.inventory');
     });
@@ -72,6 +72,7 @@ Route::middleware(['auth', 'web'])->group(function () {
             Route::post('update/{id}', 'updateData');
             Route::delete('/delete/{id}', 'deleteData');
             Route::get('/history', 'getHistory');
+            Route::get('export', 'export');
         });
 
         Route::prefix('users')->controller(UserController::class)->group(function () {

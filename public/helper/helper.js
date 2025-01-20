@@ -97,4 +97,3 @@ function categoryAlert() {
         timer: 3000,
     });
 }
-
